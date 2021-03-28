@@ -1,11 +1,13 @@
 import React from "react";
-//Styling
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  makeStyles,
+} from "@material-ui/core";
 import Sidebar from "../Sidebar";
-import MenuAddForm from "../Menu/MenuAddForm";
-import Menu from "../Menu/Menu";
-import MenuItem from "../Menu/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const Location = () => {
   const classes = useStyles();
 
   return (
@@ -33,9 +35,15 @@ const Home = () => {
       <Sidebar />
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <form autoComplete="off" noValidate>
+          <Card>
+            <CardHeader subheader="" title="Location" />
+            <Divider />
+            <CardContent></CardContent>
+          </Card>
+        </form>
       </main>
     </div>
   );
 };
-
-export default Home;
+export default Location;
