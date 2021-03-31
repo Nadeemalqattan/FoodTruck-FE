@@ -1,6 +1,12 @@
 import React from "react";
 //Styling
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  makeStyles,
+} from "@material-ui/core";
 import Sidebar from "../Sidebar";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const Hotspots = () => {
   const classes = useStyles();
 
   return (
@@ -29,9 +35,15 @@ const Home = () => {
       <Sidebar />
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <form autoComplete="off" noValidate>
+          <Card>
+            <CardHeader subheader="" title="Customer Hotspot" />
+            <Divider />
+            <CardContent></CardContent>
+          </Card>
+        </form>
       </main>
     </div>
   );
 };
-
-export default Home;
+export default Hotspots;
