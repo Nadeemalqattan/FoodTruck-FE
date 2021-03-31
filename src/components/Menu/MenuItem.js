@@ -1,4 +1,5 @@
 import React from "react";
+//Styling
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -40,7 +41,7 @@ const MenuItem = () => {
               <img
                 className={classes.img}
                 alt="complex"
-                src="/static/images/grid/complex.jpg"
+                src="https://media-cdn.tripadvisor.com/media/photo-s/15/46/f9/e2/beefroot-patty-aztec.jpg"
               />
             </ButtonBase>
           </Grid>

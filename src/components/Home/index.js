@@ -1,11 +1,7 @@
 import React from "react";
 //Styling
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-
+import { makeStyles } from "@material-ui/core/styles";
 import Sidebar from "../Sidebar";
-import MenuAddForm from "../Menu/MenuAddForm";
-import Menu from "../Menu/Menu";
-import MenuItem from "../Menu/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {

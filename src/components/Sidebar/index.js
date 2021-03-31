@@ -1,26 +1,30 @@
 import React from "react";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { fetchProfile, signout } from "../../store/actions/authActions";
 //Styling
-import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
+import clsx from "clsx";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import NavProfile from "./NavProfile";
+//Icons
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@material-ui/core/IconButton";
 import RoomIcon from "@material-ui/icons/Room";
 import ListIcon from "@material-ui/icons/List";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
-import { useHistory } from "react-router";
-import NavProfile from "./NavProfile";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const drawerWidth = 240;
 
@@ -87,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
@@ -110,6 +115,12 @@ const Sidebar = () => {
 
   const handleHotspots = () => {
     history.push("/hotspot");
+  };
+
+  const handleProfile = () => {
+    dispatch(fetchProfile());
+    console.log("HELLLOOO", fetchProfile);
+    history.push("/profile");
   };
 
   return (
@@ -182,6 +193,15 @@ const Sidebar = () => {
               <PersonPinIcon />
             </ListItemIcon>
             <ListItemText primary="Customer Hotspot" />
+          </ListItem>
+          <ListItem button onClick={handleProfile}>
+            <ListItemText primary="profile" />
+          </ListItem>
+          <ListItem button onClick={() => dispatch(signout())}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Signout" />
           </ListItem>
         </List>
       </Drawer>

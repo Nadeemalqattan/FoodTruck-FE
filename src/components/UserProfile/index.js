@@ -12,6 +12,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Sidebar from "../Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProfile } from "../../store/actions/authActions";
 
 const states = [
   {
@@ -47,22 +49,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserProfile = () => {
-  const classes = useStyles();
-  const [values, setValues] = useState({
-    firstName: "Katarina",
-    lastName: "Smith",
-    email: "demo@devias.io",
-    phone: "",
-    state: "Alabama",
-    country: "USA",
-  });
+  const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
+  const profile = useSelector((state) => state.user.profile);
+  console.log("PROOOFILE", profile);
+  const [userProfile, setuserProfile] = useState(profile);
+
+  const classes = useStyles();
+
+  const handleChange = (event) =>
+    setuserProfile({ ...userProfile, [event.target.name]: event.target.value });
+
+  const handleSubmit = () => {
+    dispatch(updateProfile(userProfile));
+    console.log("CHANGE", userProfile);
   };
+
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -81,15 +83,15 @@ const UserProfile = () => {
                   <TextField
                     fullWidth
                     helperText="Please specify the first name"
-                    label="First name"
-                    name="firstName"
+                    label={profile.name}
+                    name="name"
                     onChange={handleChange}
                     required
-                    value={values.firstName}
+                    value={userProfile.name}
                     variant="outlined"
                   />
                 </Grid>
-                <Grid item md={6} xs={12}>
+                {/* <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
                     label="Last name"
@@ -151,7 +153,7 @@ const UserProfile = () => {
                       </option>
                     ))}
                   </TextField>
-                </Grid>
+                </Grid> */}
                 <Grid item md={6} xs={12}>
                   <Box
                     sx={{
@@ -160,7 +162,11 @@ const UserProfile = () => {
                       p: 3,
                     }}
                   >
-                    <Button color="primary" variant="contained">
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={handleSubmit}
+                    >
                       Save details
                     </Button>
                   </Box>

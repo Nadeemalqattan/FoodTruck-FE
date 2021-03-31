@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { signin } from "../../store/actions/authActions";
+import { fetchProfile, signin } from "../../store/actions/authActions";
 // Styling
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -51,9 +51,11 @@ const Signin = () => {
 
   const handleSignin = (event) => {
     event.preventDefault();
-    dispatch(signin(user, history));
+    dispatch(signin(user));
+    dispatch(fetchProfile());
     history.replace("/");
   };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

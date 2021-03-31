@@ -6,7 +6,7 @@ import MenuAddForm from "./Menu/MenuAddForm";
 import MenuEditForm from "./Menu/MenuEditForm";
 import Signin from "./Signin";
 import UserProfile from "./UserProfile";
-import Location from "./Location";
+// import Location from "./Location";
 
 const Routes = () => {
   return (
@@ -20,9 +20,9 @@ const Routes = () => {
       <Route path="/menu">
         <Menu />
       </Route>
-      <Route path="/location">
+      {/* <Route path="/location">
         <Location />
-      </Route>
+      </Route> */}
       <Route path="/hotspot">
         <Hotspots />
       </Route>
