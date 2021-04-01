@@ -1,11 +1,7 @@
 import React from "react";
 //Styling
 import { Avatar, Box, Typography, makeStyles } from "@material-ui/core";
-const user = {
-  avatar: "/static/images/avatars/avatar_6.png",
-  jobTitle: "Senior Developer",
-  name: "Food Truck",
-};
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -18,6 +14,11 @@ const useStyles = makeStyles(() => ({
 
 const NavProfile = () => {
   const classes = useStyles();
+  const profile = useSelector((state) => state.user.profile);
+
+  // const user = {
+  //   avatar: "",
+  // };
 
   return (
     <Box
@@ -35,9 +36,9 @@ const NavProfile = () => {
           p: 2,
         }}
       >
-        <Avatar className={classes.avatar} src={user.avatar} to="/profile" />
+        {/* <Avatar className={classes.avatar} src={user.avatar} to="/profile" /> */}
         <Typography className={classes.name} color="textPrimary" variant="h6">
-          {user.name}
+          {/* {profile.name} */}
         </Typography>
       </Box>
     </Box>
