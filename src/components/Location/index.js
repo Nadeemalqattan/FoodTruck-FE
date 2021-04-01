@@ -8,7 +8,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Sidebar from "../Sidebar";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getLocation } from "../../store/actions/authActions";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -48,6 +49,8 @@ const useStyles = makeStyles((theme) => ({
 
 // navigator.geolocation.getCurrentPosition(success, error, options);
 const Location = () => {
+  const profile = useSelector((state) => state.user.profile);
+  const dispatch = useDispatch();
   const classes = useStyles();
   // const [details, setDetails] = useState(null);
 
@@ -103,7 +106,15 @@ const Location = () => {
   };
 
   const location = useGeoLocation();
-
+  if (location.loaded) {
+    dispatch(
+      getLocation(
+        location.coordinates.lng,
+        location.coordinates.lat,
+        profile.id
+      )
+    );
+  }
   return (
     <div className={classes.root}>
       <Sidebar />
