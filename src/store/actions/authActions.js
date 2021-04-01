@@ -77,3 +77,11 @@ export const checkForToken = () => (dispatch) => {
     }
   }
 };
+
+export const getLocation = (longitude, latitude,foodTruckID) => async (dispatch) => {
+  try {
+    const res = await instance.put(`foodtruck/location/${foodTruckID}`, { longitude, latitude });
+  } catch (error) {
+    console.log(error);
+  }
+};
