@@ -47,12 +47,10 @@ const Signin = () => {
 
   const handleChange = (event) =>
     setUser({ ...user, [event.target.name]: event.target.value });
-  console.log(user);
 
   const handleSignin = (event) => {
     event.preventDefault();
-    dispatch(signin(user));
-    dispatch(fetchProfile());
+    dispatch(signin(user, fetchProfile));
     history.replace("/");
   };
 

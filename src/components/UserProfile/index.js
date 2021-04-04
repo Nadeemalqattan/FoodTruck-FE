@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import Sidebar from "../Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "../../store/actions/authActions";
+import { fetchProfile, updateProfile } from "../../store/actions/authActions";
 
 const states = [
   {
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 const UserProfile = () => {
   const dispatch = useDispatch();
 
-  const profile = useSelector((state) => state.user.profile);
+  const profile = useSelector((state) => state.authReducer.profile);
   console.log("PROOOFILE", profile);
   const [userProfile, setuserProfile] = useState(profile);
 
@@ -62,7 +62,6 @@ const UserProfile = () => {
 
   const handleSubmit = () => {
     dispatch(updateProfile(userProfile));
-    console.log("CHANGE", userProfile);
   };
 
   return (

@@ -11,7 +11,7 @@ const setUser = (token) => {
   };
 };
 
-export const signin = (user) => {
+export const signin = (user, history) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/signin", user);

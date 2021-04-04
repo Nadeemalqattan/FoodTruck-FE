@@ -123,6 +123,11 @@ const Sidebar = () => {
     history.push("/profile");
   };
 
+  const handleSignout = () => {
+    dispatch(signout());
+    history.replace("/Signin");
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -197,7 +202,7 @@ const Sidebar = () => {
           <ListItem button onClick={handleProfile}>
             <ListItemText primary="profile" />
           </ListItem>
-          <ListItem button onClick={() => dispatch(signout())}>
+          <ListItem button onClick={handleSignout}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>

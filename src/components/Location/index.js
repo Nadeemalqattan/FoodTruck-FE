@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
+
 //Styling
 import {
   Card,
@@ -27,40 +28,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// var options = {
-//   enableHighAccuracy: true,
-//   timeout: 500000,
-//   maximumAge: 0,
-// };
-
-// function success(pos) {
-//   var crd = pos.coords;
-
-//   console.log("Your current position is:");
-//   console.log(`Latitude : ${crd.latitude}`);
-//   console.log(`Longitude: ${crd.longitude}`);
-//   console.log(`More or less ${crd.accuracy} meters.`);
-// }
-
-// function error(err) {
-//   console.warn(`ERROR(${err.code}): ${err.message}`);
-// }
-
-// navigator.geolocation.getCurrentPosition(success, error, options);
 const Location = () => {
   const classes = useStyles();
-  // const [details, setDetails] = useState(null);
-
-  // if (navigator.geolocation) {
-  //   navigator.geolocation.getCurrentPosition(displayLocationInfo);
-  // }
-
-  // function displayLocationInfo(position) {
-  //   const lng = position.coords.longitude;
-  //   const lat = position.coords.latitude;
-
-  //   console.log(`longitude: ${lng} | latitude: ${lat}`);
-  // }
 
   const useGeoLocation = () => {
     const [location, setLocation] = useState({
@@ -114,28 +83,18 @@ const Location = () => {
             <CardHeader subheader="" title="Location" />
             <Divider />
             <CardContent>
-              <div className="row d-flex justify-content-center mt-3 mb-5 pb-5">
-                <div className="col-6">
-                  <div class="card">
-                    <div class="card-header text-left font-weight-bold d-flex">
-                      <div className="inline-block mr-auto pt-1">
-                        <p>
-                          {location.loaded
-                            ? "Location cordnations"
-                            : "Location data not available yet."}
-                        </p>
-                        <>
-                          <p>
-                            Lat:{JSON.stringify(location.coordinates.lat)}
-                            <br />
-                            lng:{JSON.stringify(location.coordinates.lng)}
-                          </p>
-                        </>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <p>
+                {location.loaded
+                  ? "Location cordnations"
+                  : "Location data not available yet."}
+              </p>
+              <>
+                <p>
+                  Lat:{JSON.stringify(location.coordinates.lat)}
+                  <br />
+                  lng:{JSON.stringify(location.coordinates.lng)}
+                </p>
+              </>
             </CardContent>
           </Card>
         </form>
