@@ -14,11 +14,6 @@ const useStyles = makeStyles(() => ({
 
 const NavProfile = () => {
   const classes = useStyles();
-  const profile = useSelector((state) => state.user.profile);
-
-  // const user = {
-  //   avatar: "",
-  // };
 
   return (
     <Box
@@ -36,10 +31,11 @@ const NavProfile = () => {
           p: 2,
         }}
       >
-        {/* <Avatar className={classes.avatar} src={user.avatar} to="/profile" /> */}
-        <Typography className={classes.name} color="textPrimary" variant="h6">
-          {/* {profile.name} */}
-        </Typography>
+        <Typography
+          className={classes.name}
+          color="textPrimary"
+          variant="h6"
+        ></Typography>
       </Box>
     </Box>
   );

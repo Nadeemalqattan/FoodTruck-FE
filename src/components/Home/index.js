@@ -2,6 +2,8 @@ import React from "react";
 //Styling
 import { makeStyles } from "@material-ui/core/styles";
 import Sidebar from "../Sidebar";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Sidebar />
