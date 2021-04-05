@@ -14,10 +14,9 @@ const setUser = (token) => {
 export const signin = (user, history) => {
   return async (dispatch) => {
     try {
-      const res = await instance.post("/signin", user);
+      const res = await instance.post("/foodtruck/signin", user);
       localStorage.setItem("myToken", res.data.token);
       dispatch(setUser(res.data.token));
-      alert("Successfully signed in");
     } catch (error) {
       console.error(error);
     }
@@ -78,9 +77,14 @@ export const checkForToken = () => (dispatch) => {
   }
 };
 
-export const getLocation = (longitude, latitude,foodTruckID) => async (dispatch) => {
+export const getLocation = (longitude, latitude, foodTruckID) => async (
+  dispatch
+) => {
   try {
-    const res = await instance.put(`foodtruck/location/${foodTruckID}`, { longitude, latitude });
+    const res = await instance.put(`foodtruck/location/${foodTruckID}`, {
+      longitude,
+      latitude,
+    });
   } catch (error) {
     console.log(error);
   }

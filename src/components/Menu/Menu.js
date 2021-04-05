@@ -1,5 +1,5 @@
 import React from "react";
-//Styling
+/*-------Styling-------*/
 import {
   Box,
   Button,

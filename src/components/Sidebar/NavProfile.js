@@ -1,7 +1,6 @@
 import React from "react";
-//Styling
-import { Avatar, Box, Typography, makeStyles } from "@material-ui/core";
-import { useSelector } from "react-redux";
+/*-------Styling-------*/
+import { Box, Typography, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   avatar: {
