@@ -1,9 +1,7 @@
 import React from "react";
-//Styling
+/*-------Styling-------*/
 import { makeStyles } from "@material-ui/core/styles";
 import Sidebar from "../Sidebar";
-import { useSelector } from "react-redux";
-import { Redirect } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {

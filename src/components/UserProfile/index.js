@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { updateProfile } from "../../store/actions/authActions";
+/*-------Styling-------*/
 import {
   Box,
   Button,
@@ -12,23 +14,6 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Sidebar from "../Sidebar";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProfile, updateProfile } from "../../store/actions/authActions";
-
-const states = [
-  {
-    value: "alabama",
-    label: "Alabama",
-  },
-  {
-    value: "new-york",
-    label: "New York",
-  },
-  {
-    value: "san-francisco",
-    label: "San Francisco",
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +37,6 @@ const UserProfile = () => {
   const dispatch = useDispatch();
 
   const profile = useSelector((state) => state.authReducer.profile);
-  console.log("PROOOFILE", profile);
   const [userProfile, setuserProfile] = useState(profile);
 
   const classes = useStyles();
@@ -90,69 +74,7 @@ const UserProfile = () => {
                     variant="outlined"
                   />
                 </Grid>
-                {/* <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Last name"
-                    name="lastName"
-                    onChange={handleChange}
-                    required
-                    value={values.lastName}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Email Address"
-                    name="email"
-                    onChange={handleChange}
-                    required
-                    value={values.email}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Phone Number"
-                    name="phone"
-                    onChange={handleChange}
-                    type="number"
-                    value={values.phone}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Country"
-                    name="country"
-                    onChange={handleChange}
-                    required
-                    value={values.country}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Select State"
-                    name="state"
-                    onChange={handleChange}
-                    required
-                    select
-                    SelectProps={{ native: true }}
-                    value={values.state}
-                    variant="outlined"
-                  >
-                    {states.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
-                </Grid> */}
+
                 <Grid item md={6} xs={12}>
                   <Box
                     sx={{

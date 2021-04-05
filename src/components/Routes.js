@@ -1,4 +1,6 @@
 import { Route, Switch } from "react-router";
+import { useSelector } from "react-redux";
+/*-------Routes-------*/
 import Hotspots from "./Hotspots";
 import Home from "./Home";
 import Menu from "./Menu/Menu";
@@ -7,11 +9,9 @@ import MenuEditForm from "./Menu/MenuEditForm";
 import Signin from "./Signin";
 import UserProfile from "./UserProfile";
 import Location from "./Location";
-import { useSelector } from "react-redux";
 
 const Routes = () => {
   const user = useSelector((state) => state.authReducer.user);
-  console.log("USERR", user);
   return (
     <Switch>
       <Route

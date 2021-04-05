@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-//Styling
+/*-------Styling-------*/
 import {
   Box,
   Button,

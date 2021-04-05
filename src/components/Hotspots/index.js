@@ -1,5 +1,5 @@
 import React from "react";
-//Styling
+/*-------Styling-------*/
 import {
   Card,
   CardContent,
@@ -8,8 +8,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Sidebar from "../Sidebar";
-import BaseMap from "../BaseMap";
-import MapTest from "../BaseMap/MapTest";
+import HeatMap from "../Heatmap";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +40,7 @@ const Hotspots = () => {
             <CardHeader subheader="" title="Customer Hotspot" />
             <Divider />
             <CardContent>
-              <MapTest />
+              <HeatMap />
             </CardContent>
           </Card>
         </form>

@@ -1,6 +1,8 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getLocation } from "../../store/actions/authActions";
 
-//Styling
+/*-------Styling-------*/
 import {
   Card,
   CardContent,
@@ -9,8 +11,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Sidebar from "../Sidebar";
-import { useSelector, useDispatch } from "react-redux";
-import { getLocation } from "../../store/actions/authActions";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Location = () => {
-  const profile = useSelector((state) => state.user.profile);
+  const profile = useSelector((state) => state.authReducer.profile);
   const dispatch = useDispatch();
   const classes = useStyles();
 

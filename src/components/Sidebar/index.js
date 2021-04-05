@@ -2,7 +2,8 @@ import React from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { fetchProfile, signout } from "../../store/actions/authActions";
-//Styling
+/*-------Styling-------*/
+import NavProfile from "./NavProfile";
 import AppBar from "@material-ui/core/AppBar";
 import clsx from "clsx";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,8 +18,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import NavProfile from "./NavProfile";
-//Icons
+/*-------Icons-------*/
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import RoomIcon from "@material-ui/icons/Room";

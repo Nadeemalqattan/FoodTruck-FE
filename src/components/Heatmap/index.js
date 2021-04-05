@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import GoogleMapReact from "google-map-react";
+/*-------Styling-------*/
+import { HeatMapWrapper } from "../styles";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -14,7 +16,7 @@ const heatMapData = {
   },
 };
 
-const SimpleMap = () => {
+const HeatMap = () => {
   const defaultProps = {
     center: {
       lat: 26.228516,
@@ -25,7 +27,7 @@ const SimpleMap = () => {
 
   return (
     // Important! Always set the container height explicitly
-    <div style={{ height: "60vh", width: "100%" }}>
+    <HeatMapWrapper>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyCZCYlKQyNqmTRFjrQSyRVxGd53_7j7DlQ" }}
         defaultCenter={defaultProps.center}
@@ -39,8 +41,8 @@ const SimpleMap = () => {
           text="YOUR LOCATION"
         />
       </GoogleMapReact>
-    </div>
+    </HeatMapWrapper>
   );
 };
 
-export default SimpleMap;
+export default HeatMap;
