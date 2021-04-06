@@ -1,5 +1,7 @@
+/*-------React-------*/
 import { Route, Switch } from "react-router";
 import { useSelector } from "react-redux";
+
 /*-------Routes-------*/
 import Hotspots from "./Hotspots";
 import Home from "./Home";

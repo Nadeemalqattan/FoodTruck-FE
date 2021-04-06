@@ -1,4 +1,5 @@
 import React from "react";
+
 /*-------Styling-------*/
 import {
   Box,
@@ -10,6 +11,8 @@ import {
   Grid,
   makeStyles,
 } from "@material-ui/core";
+
+/*-------Components-------*/
 import MenuItem from "./MenuItem";
 import Sidebar from "../Sidebar";
 

@@ -1,20 +1,21 @@
+/*-------React Imports-------*/
 import React from "react";
 import GoogleMapReact from "google-map-react";
+import { useSelector } from "react-redux";
+
 /*-------Styling-------*/
 import { HeatMapWrapper } from "../styles";
-import { useSelector } from "react-redux";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const HeatMap = () => {
   const heatmap = useSelector((state) => state.authReducer.heatmap);
 
-  console.log("HEATMAP", heatmap);
-  const heatMapData = {
+  const data = {
     positions: [
       {
-        lat: heatmap && heatmap[0].location.coordinates[1],
-        lng: heatmap && heatmap[0].location.coordinates[0],
+        lat: 0,
+        lng: 0,
       },
     ],
     options: {
@@ -23,7 +24,13 @@ const HeatMap = () => {
     },
   };
 
-  console.log("Heatmap data", typeof heatMapData);
+  for (var i = 0; i < Object.keys(data).length; i++) {
+    data.positions.push({
+      lat: heatmap && heatmap[i].location.coordinates[1],
+      lng: heatmap && heatmap[i].location.coordinates[0],
+    });
+  }
+
   const defaultProps = {
     center: {
       lat: 26.228516,
@@ -33,14 +40,13 @@ const HeatMap = () => {
   };
 
   return (
-    // Important! Always set the container height explicitly
     <HeatMapWrapper>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyCZCYlKQyNqmTRFjrQSyRVxGd53_7j7DlQ" }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         heatmapLibrary={true}
-        heatmap={heatMapData}
+        heatmap={data}
       >
         <AnyReactComponent
           lat={26.228516}

@@ -1,7 +1,11 @@
+/*-------React-------*/
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+/*-------Actions-------*/
 import { fetchFoodTruck, signin } from "../../store/actions/authActions";
+
 /*-------Styling-------*/
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";

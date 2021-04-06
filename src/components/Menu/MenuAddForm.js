@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 /*-------Styling-------*/
 import {
   Box,
@@ -11,6 +12,8 @@ import {
   TextField,
   makeStyles,
 } from "@material-ui/core";
+
+/*-------Components-------*/
 import Sidebar from "../Sidebar";
 
 const categories = [
