@@ -1,6 +1,10 @@
 import React from "react";
+
 /*-------Styling-------*/
 import { makeStyles } from "@material-ui/core/styles";
+import { Welcome } from "../styles";
+
+/*-------Components-------*/
 import Sidebar from "../Sidebar";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,12 +28,15 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <Sidebar />
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-      </main>
-    </div>
+    <>
+      <div className={classes.root}>
+        <Sidebar />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+        </main>
+      </div>
+      <Welcome>Welcome to your truck's portal.</Welcome>
+    </>
   );
 };
 

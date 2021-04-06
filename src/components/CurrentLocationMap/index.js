@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import MapPicker from "react-google-map-picker";
 
 const CurrentLocationMap = () => {

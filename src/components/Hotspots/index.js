@@ -1,4 +1,5 @@
 import React from "react";
+
 /*-------Styling-------*/
 import {
   Card,
@@ -7,9 +8,10 @@ import {
   Divider,
   makeStyles,
 } from "@material-ui/core";
+
+/*-------Components-------*/
 import Sidebar from "../Sidebar";
 import HeatMap from "../Heatmap";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,14 +33,6 @@ const useStyles = makeStyles((theme) => ({
 const Hotspots = () => {
   const classes = useStyles();
 
-  const heatmap = useSelector((state) => state.authReducer.heatmap);
-  // heatmap.map((element) => {
-  //   console.log(
-  //     "LOCATION",
-  //     `lat: ${element.location.coordinates[0]}, lng: ${element.location.coordinates[1]}`
-  //   );
-  // });
-
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -49,7 +43,7 @@ const Hotspots = () => {
             <CardHeader subheader="" title="Customer Hotspot" />
             <Divider />
             <CardContent>
-              <HeatMap />
+              <HeatMap />;
             </CardContent>
           </Card>
         </form>

@@ -1,6 +1,10 @@
+/*-------React-------*/
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+/*-------Actions-------*/
 import { updateProfile } from "../../store/actions/authActions";
+
 /*-------Styling-------*/
 import {
   Box,
@@ -13,6 +17,8 @@ import {
   TextField,
   makeStyles,
 } from "@material-ui/core";
+
+/*-------Components-------*/
 import Sidebar from "../Sidebar";
 
 const useStyles = makeStyles((theme) => ({

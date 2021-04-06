@@ -1,13 +1,19 @@
+/*-------React-------*/
 import React from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
+
+/*-------Actions-------*/
 import {
   fetchFoodTruck,
   fetchHeatmap,
   signout,
 } from "../../store/actions/authActions";
-/*-------Styling-------*/
+
+/*-------Components-------*/
 import NavProfile from "./NavProfile";
+
+/*-------Styling-------*/
 import AppBar from "@material-ui/core/AppBar";
 import clsx from "clsx";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -20,16 +26,18 @@ import Typography from "@material-ui/core/Typography";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+
 /*-------Icons-------*/
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import RoomIcon from "@material-ui/icons/Room";
 import ListIcon from "@material-ui/icons/List";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import EventNoteIcon from "@material-ui/icons/EventNote";
+import MapIcon from "@material-ui/icons/Map";
 
 const drawerWidth = 240;
 
@@ -210,11 +218,14 @@ const Sidebar = () => {
           </ListItem>
           <ListItem button onClick={handleHotspots}>
             <ListItemIcon>
-              <PersonPinIcon />
+              <MapIcon />
             </ListItemIcon>
             <ListItemText primary="Customer Hotspot" />
           </ListItem>
           <ListItem button onClick={handleProfile}>
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
             <ListItemText primary="profile" />
           </ListItem>
           <ListItem button onClick={handleSignout}>

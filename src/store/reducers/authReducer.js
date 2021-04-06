@@ -2,7 +2,7 @@ import * as types from "../types";
 
 const initialState = {
   user: null,
-  heatmap: [],
+  heatmap: null,
 };
 
 const authReducer = (state = initialState, action) => {

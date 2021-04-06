@@ -1,5 +1,8 @@
+/*-------React-------*/
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+/*-------Actions-------*/
 import { getLocation } from "../../store/actions/authActions";
 
 /*-------Styling-------*/
@@ -14,6 +17,8 @@ import {
   LinearProgress,
   makeStyles,
 } from "@material-ui/core";
+
+/*-------Components-------*/
 import Sidebar from "../Sidebar";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Location = () => {
   const profile = useSelector((state) => state.authReducer.profile);
-  console.log("USER PROFILE", profile);
   const dispatch = useDispatch();
   const classes = useStyles();
 
