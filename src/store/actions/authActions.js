@@ -11,7 +11,7 @@ const setUser = (token) => {
   };
 };
 
-export const signin = (user, history) => {
+export const signin = (user) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/foodtruck/signin", user);
@@ -32,12 +32,25 @@ export const signout = () => {
   };
 };
 
-export const fetchProfile = () => {
+export const fetchFoodTruck = () => {
   return async (dispatch) => {
     try {
       const res = await instance.get("/foodtruck/user");
       dispatch({
-        type: types.FETCH_PROFILE,
+        type: types.FETCH_FOODTRUCK,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+export const fetchHeatmap = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/foodtruck/heatmap");
+      dispatch({
+        type: types.FETCH_HEATMAP,
         payload: res.data,
       });
     } catch (error) {

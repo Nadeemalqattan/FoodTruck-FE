@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { fetchProfile, signin } from "../../store/actions/authActions";
+import { fetchFoodTruck, signin } from "../../store/actions/authActions";
 /*-------Styling-------*/
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -50,7 +50,7 @@ const Signin = () => {
 
   const handleSignin = (event) => {
     event.preventDefault();
-    dispatch(signin(user, fetchProfile));
+    dispatch(signin(user, fetchFoodTruck));
     history.replace("/");
   };
 

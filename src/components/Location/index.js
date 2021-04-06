@@ -4,10 +4,14 @@ import { getLocation } from "../../store/actions/authActions";
 
 /*-------Styling-------*/
 import {
+  Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
   Divider,
+  Grid,
+  LinearProgress,
   makeStyles,
 } from "@material-ui/core";
 import Sidebar from "../Sidebar";
@@ -32,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Location = () => {
   const profile = useSelector((state) => state.authReducer.profile);
+  console.log("USER PROFILE", profile);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -76,7 +81,17 @@ const Location = () => {
   };
 
   const location = useGeoLocation();
-  if (location.loaded) {
+  // if (location.loaded) {
+  //   dispatch(
+  //     getLocation(
+  //       location.coordinates.lng,
+  //       location.coordinates.lat,
+  //       profile.id
+  //     )
+  //   );
+  // }
+
+  const handleSubmit = () => {
     dispatch(
       getLocation(
         location.coordinates.lng,
@@ -84,7 +99,7 @@ const Location = () => {
         profile.id
       )
     );
-  }
+  };
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -95,18 +110,29 @@ const Location = () => {
             <CardHeader subheader="" title="Location" />
             <Divider />
             <CardContent>
-              <p>
-                {location.loaded
-                  ? "Location cordnations"
-                  : "Location data not available yet."}
-              </p>
-              <>
-                <p>
-                  Lat:{JSON.stringify(location.coordinates.lat)}
-                  <br />
-                  lng:{JSON.stringify(location.coordinates.lng)}
-                </p>
-              </>
+              {location.loaded ? (
+                <>
+                  <Grid item md={6} xs={12}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        p: 3,
+                      }}
+                    >
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        onClick={handleSubmit}
+                      >
+                        Update Location
+                      </Button>
+                    </Box>
+                  </Grid>
+                </>
+              ) : (
+                <LinearProgress />
+              )}
             </CardContent>
           </Card>
         </form>
