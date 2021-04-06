@@ -9,6 +9,7 @@ import MenuEditForm from "./Menu/MenuEditForm";
 import Signin from "./Signin";
 import UserProfile from "./UserProfile";
 import Location from "./Location";
+import Schedule from "./Schedule";
 
 const Routes = () => {
   const user = useSelector((state) => state.authReducer.user);
@@ -71,6 +72,16 @@ const Routes = () => {
             return <Signin />;
           } else if (user) {
             return <UserProfile />;
+          }
+        }}
+      />
+      <Route
+        path={"/Schedule"}
+        component={() => {
+          if (user === null) {
+            return <Signin />;
+          } else if (user) {
+            return <Schedule />;
           }
         }}
       />

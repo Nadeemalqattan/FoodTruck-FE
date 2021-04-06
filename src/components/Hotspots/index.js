@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import Sidebar from "../Sidebar";
 import HeatMap from "../Heatmap";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Hotspots = () => {
   const classes = useStyles();
+
+  const heatmap = useSelector((state) => state.authReducer.heatmap);
+  // heatmap.map((element) => {
+  //   console.log(
+  //     "LOCATION",
+  //     `lat: ${element.location.coordinates[0]}, lng: ${element.location.coordinates[1]}`
+  //   );
+  // });
 
   return (
     <div className={classes.root}>

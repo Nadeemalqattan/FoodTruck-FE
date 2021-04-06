@@ -1,7 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { fetchProfile, signout } from "../../store/actions/authActions";
+import {
+  fetchFoodTruck,
+  fetchHeatmap,
+  signout,
+} from "../../store/actions/authActions";
 /*-------Styling-------*/
 import NavProfile from "./NavProfile";
 import AppBar from "@material-ui/core/AppBar";
@@ -25,6 +29,7 @@ import RoomIcon from "@material-ui/icons/Room";
 import ListIcon from "@material-ui/icons/List";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import EventNoteIcon from "@material-ui/icons/EventNote";
 
 const drawerWidth = 240;
 
@@ -114,18 +119,22 @@ const Sidebar = () => {
   };
 
   const handleHotspots = () => {
+    dispatch(fetchHeatmap());
     history.push("/hotspot");
   };
 
   const handleProfile = () => {
-    dispatch(fetchProfile());
-    console.log("HELLLOOO", fetchProfile);
+    dispatch(fetchFoodTruck());
     history.push("/profile");
   };
 
   const handleSignout = () => {
     dispatch(signout());
-    history.replace("/Signin");
+    history.replace("/signin");
+  };
+
+  const handleSchedule = () => {
+    history.replace("/schedule");
   };
 
   return (
@@ -181,6 +190,12 @@ const Sidebar = () => {
         <Divider />
         {/* Sidebar */}
         <List>
+          <ListItem button onClick={handleSchedule}>
+            <ListItemIcon>
+              <EventNoteIcon />
+            </ListItemIcon>
+            <ListItemText primary="Schedule" />
+          </ListItem>
           <ListItem button onClick={handleLocation}>
             <ListItemIcon>
               <RoomIcon />
