@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 /*-------Styling-------*/
 import {
@@ -12,6 +13,7 @@ import {
 /*-------Components-------*/
 import Sidebar from "../Sidebar";
 import HeatMap from "../Heatmap";
+import { fetchHeatmap } from "../../store/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +33,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Hotspots = () => {
+  const heatmap = useSelector((state) => state.authReducer.heatmap);
+  const heatmapLoading = useSelector(
+    (state) => state.authReducer.heatmapLoading
+  );
+  useEffect(() => {
+    dispatch(fetchHeatmap());
+  },[])
+  const dispatch = useDispatch();
+
   const classes = useStyles();
 
   return (
@@ -43,7 +54,7 @@ const Hotspots = () => {
             <CardHeader subheader="" title="Customer Hotspot" />
             <Divider />
             <CardContent>
-              <HeatMap />;
+              {heatmapLoading ? "loading" : <HeatMap heatmap={heatmap} />}
             </CardContent>
           </Card>
         </form>

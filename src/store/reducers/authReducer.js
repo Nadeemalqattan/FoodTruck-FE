@@ -1,8 +1,10 @@
+import { TvRounded } from "@material-ui/icons";
 import * as types from "../types";
 
 const initialState = {
   user: null,
   heatmap: null,
+  heatmapLoading: true,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -18,9 +20,17 @@ const authReducer = (state = initialState, action) => {
         profile: action.payload,
       };
     case types.FETCH_HEATMAP:
+      const heatmap = [];
+      for (let i = 0; i < action.payload.length; ++i) {
+        heatmap.push({
+          lat: action.payload[i].location.coordinates[1],
+          lng: action.payload[i].location.coordinates[0],
+        });
+      }
       return {
         ...state,
-        heatmap: action.payload,
+        heatmap: heatmap,
+        heatmapLoading: false,
       };
     case types.UPDATE_PROFILE:
       return {
