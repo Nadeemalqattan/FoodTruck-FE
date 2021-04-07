@@ -127,7 +127,7 @@ const Sidebar = () => {
   };
 
   const handleHotspots = () => {
-    dispatch(fetchHeatmap());
+    
     history.push("/hotspot");
   };
 
