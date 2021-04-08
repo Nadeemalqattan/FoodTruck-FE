@@ -104,6 +104,7 @@ const Location = () => {
       )
     );
   };
+  console.log(location)
   return (
     <div className={classes.root}>
       <Sidebar />

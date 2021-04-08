@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   heatmap: null,
   heatmapLoading: true,
+  location: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -21,11 +22,15 @@ const authReducer = (state = initialState, action) => {
       };
     case types.FETCH_HEATMAP:
       const heatmap = [];
+      
       for (let i = 0; i < action.payload.length; ++i) {
-        heatmap.push({
-          lat: action.payload[i].location.coordinates[1],
-          lng: action.payload[i].location.coordinates[0],
-        });
+        if (action.payload[i].location !== null) {
+          heatmap.push({
+            lat: action.payload[i].location.coordinates[1],
+            lng: action.payload[i].location.coordinates[0],
+            weight: 5,
+          });
+        }
       }
       return {
         ...state,
@@ -37,11 +42,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         profile: action.payload,
       };
-    // case types.GET_LOCATION:
-    //   return {
-    //     ...state,
-    //     foodtruck: action.payload,
-    //   };
+    case types.GET_LOCATION:
+      console.log(action.payload);
+      return {
+        ...state,
+        location: action.payload,
+      };
     default:
       return state;
   }

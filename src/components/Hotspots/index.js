@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 /*-------Styling-------*/
@@ -8,12 +8,13 @@ import {
   CardHeader,
   Divider,
   makeStyles,
+  Button,
 } from "@material-ui/core";
 
 /*-------Components-------*/
 import Sidebar from "../Sidebar";
 import HeatMap from "../Heatmap";
-import { fetchHeatmap } from "../../store/actions/authActions";
+import { fetchHeatmap, getLocation } from "../../store/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,16 +35,66 @@ const useStyles = makeStyles((theme) => ({
 
 const Hotspots = () => {
   const heatmap = useSelector((state) => state.authReducer.heatmap);
+  const profile = useSelector((state) => state.authReducer.profile);
+
   const heatmapLoading = useSelector(
     (state) => state.authReducer.heatmapLoading
   );
   useEffect(() => {
     dispatch(fetchHeatmap());
-  },[])
+  }, []);
   const dispatch = useDispatch();
 
   const classes = useStyles();
+  const useGeoLocation = () => {
+    const [location, setLocation] = useState({
+      loaded: false,
+      coordinates: { lat: "", lng: "" },
+    });
 
+    const onSuccess = (location) => {
+      setLocation({
+        loaded: true,
+        coordinates: {
+          lat: location.coords.latitude,
+          lng: location.coords.longitude,
+        },
+      });
+    };
+
+    const onError = (error) => {
+      setLocation({
+        loaded: true,
+        error: {
+          code: error.code,
+          message: error.message,
+        },
+      });
+    };
+
+    useEffect(() => {
+      if (!("geolocation" in navigator)) {
+        onError({
+          code: 0,
+          message: "Geolocation not supported",
+        });
+      }
+
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    }, []);
+
+    return location;
+  };
+  const location = useGeoLocation();
+  const handleSubmit = () => {
+    dispatch(
+      getLocation(
+        location.coordinates.lng,
+        location.coordinates.lat,
+        profile.id
+      )
+    );
+  };
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -52,9 +103,16 @@ const Hotspots = () => {
         <form autoComplete="off" noValidate>
           <Card>
             <CardHeader subheader="" title="Customer Hotspot" />
+            <Button color="primary" variant="contained" onClick={handleSubmit}>
+              Update Location
+            </Button>
             <Divider />
             <CardContent>
-              {heatmapLoading ? "loading" : <HeatMap heatmap={heatmap} />}
+              {heatmapLoading ? (
+                "loading"
+              ) : (
+                <HeatMap heatmap={heatmap} currentLocation={location} />
+              )}
             </CardContent>
           </Card>
         </form>
