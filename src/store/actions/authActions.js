@@ -98,6 +98,10 @@ export const getLocation = (longitude, latitude, foodTruckID) => async (
       longitude,
       latitude,
     });
+    dispatch({
+      type: types.GET_LOCATION,
+      payload: {latitude,longitude},
+    })
   } catch (error) {
     console.log(error);
   }
