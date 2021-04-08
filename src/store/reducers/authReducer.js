@@ -6,6 +6,7 @@ const initialState = {
   heatmap: null,
   heatmapLoading: true,
   location: null,
+  profile: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -22,7 +23,7 @@ const authReducer = (state = initialState, action) => {
       };
     case types.FETCH_HEATMAP:
       const heatmap = [];
-      
+
       for (let i = 0; i < action.payload.length; ++i) {
         if (action.payload[i].location !== null) {
           heatmap.push({

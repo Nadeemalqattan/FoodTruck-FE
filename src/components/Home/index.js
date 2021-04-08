@@ -1,11 +1,12 @@
 import React from "react";
-
+import { useDispatch } from "react-redux";
 /*-------Styling-------*/
 import { makeStyles } from "@material-ui/core/styles";
 import { Welcome } from "../styles";
 
 /*-------Components-------*/
 import Sidebar from "../Sidebar";
+import { fetchFoodTruck } from "../../store/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  dispatch(fetchFoodTruck());
   return (
     <>
       <div className={classes.root}>
