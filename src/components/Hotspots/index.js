@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const Hotspots = () => {
   const heatmap = useSelector((state) => state.authReducer.heatmap);
   const profile = useSelector((state) => state.authReducer.profile);
-
+  console.log(profile)
   const heatmapLoading = useSelector(
     (state) => state.authReducer.heatmapLoading
   );
