@@ -2,34 +2,48 @@ import instance from "./instance";
 import * as types from "../types";
 
 /*-------Fetch Menu-------*/
-// export const fetchMenu = () => async (dispatch) => {
-//   try {
-//     const res = await instance.get("");
-//     console.log(res.data);
-//     dispatch({
-//       type: types.FETCH_MENU,
-//       payload: res.data,
-//     });
-//   } catch (error) {
-//     console.log("ERROR: ", error);
-//   }
-// };
+export const fetchMenu = () => async (dispatch) => {
+  try {
+    const res = await instance.get("foodtruck/menu/");
+    console.log(res.data);
+    dispatch({
+      type: types.FETCH_MENU,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+};
 
 /*-------Add Menu-------*/
-// export const addMenu = (newMenu) => async (dispatch) => {
-//   try {
-//     const formData = new FormData();
-//     for (const key in newMenu) formData.append(key, newMenu[key]);
-//     const res = await instance.post("", formData);
-//     console.log(res.data);
-//     dispatch({
-//       type: types.ADD_MENU,
-//       payload: { newMenu: res.data },
-//     });
-//   } catch (error) {
-//     console.log("ERROR: ", error);
-//   }
+export const addMenu = (foodcategory) => async (dispatch) => {
+  try {
+    console.log(foodcategory);
+    const res = await instance.post(`foodtruck/menu/${foodcategory.id}/add`);
+    dispatch({
+      type: types.ADD_MENU,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+};
+
+/*-------Update Menu-------*/
+// export const updateMenu = (updateMenu) => {
+//   return async (dispatch) => {
+//     try {
+//       const res = await instance.put(`/foodtruck/${updateMenu.id}`, updateMenu);
+//       dispatch({
+//         type: types.UPDATE_MENU,
+//         payload: res.data,
+//       });
+//     } catch (error) {
+//       console.log("error:", error);
+//     }
+//   };
 // };
+
 /*-------Delete Menu-------*/
 // export const deleteMenu = (menuId) => async (dispatch) => {
 //   try {
@@ -38,22 +52,6 @@ import * as types from "../types";
 //     dispatch({
 //       type: types.DELETE_MENU,
 //       payload: { menuId },
-//     });
-//   } catch (error) {
-//     console.log("ERROR: ", error);
-//   }
-// };
-
-/*-------Update Menu-------*/
-// export const updateMenu = (updateMenu) => async (dispatch) => {
-//   try {
-//     const formData = new FormData();
-//     for (const key in updateMenu) formData.append(key, updateMenu[key]);
-//     const res = await instance.put("", formData);
-//     console.log(res.data);
-//     dispatch({
-//       type: types.UPDATE_MENU,
-//       payload: { updateMenu: res.data },
 //     });
 //   } catch (error) {
 //     console.log("ERROR: ", error);

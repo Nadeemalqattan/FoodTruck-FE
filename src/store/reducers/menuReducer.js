@@ -13,6 +13,21 @@ const menuReducer = (state = initialState, action) => {
         ...state,
         category: action.payload,
       };
+    case types.FETCH_MENU:
+      return {
+        ...state,
+        menu: action.payload,
+      };
+    case types.ADD_MENU:
+      return {
+        ...state,
+        menu: action.payload,
+      };
+    case types.ADD_MENU:
+      return {
+        ...state,
+        menu: action.payload,
+      };
     default:
       return state;
   }
