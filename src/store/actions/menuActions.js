@@ -59,3 +59,17 @@ import * as types from "../types";
 //     console.log("ERROR: ", error);
 //   }
 // };
+
+/*-------Add Category-------*/
+export const addCategory = (category) => async (dispatch) => {
+  try {
+    const res = await instance.post("foodtruck/menu/add", category);
+    console.log(res.data);
+    dispatch({
+      type: types.ADD_CATEGORY,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+};

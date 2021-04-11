@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCategory } from "../../store/actions/menuActions";
+import { useHistory } from "react-router";
 
 /*-------Styling-------*/
 import {
@@ -15,22 +18,6 @@ import {
 
 /*-------Components-------*/
 import Sidebar from "../Sidebar";
-import { useDispatch } from "react-redux";
-
-const categories = [
-  {
-    value: "american",
-    label: "American",
-  },
-  {
-    value: "arabic",
-    label: "Arabic",
-  },
-  {
-    value: "asian",
-    label: "Asian",
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,23 +37,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuAddForm = () => {
+const AddCategory = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [values, setValues] = useState({
+  const history = useHistory();
+
+  const [category, setCategory] = useState({
     name: "",
   });
 
   const handleChange = (event) => {
-    setValues({
-      ...values,
+    setCategory({
+      ...category,
       [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = () => {
-    // dispatch(menuCreate)
-    console.log(values);
+    dispatch(addCategory(category));
+    history.replace("/menu");
   };
   return (
     <div className={classes.root}>
@@ -86,7 +75,7 @@ const MenuAddForm = () => {
                     name="name"
                     onChange={handleChange}
                     required
-                    value={values.name}
+                    value={category.name}
                     variant="outlined"
                     type="text"
                   />
@@ -103,7 +92,6 @@ const MenuAddForm = () => {
                     <Button
                       color="primary"
                       variant="contained"
-                      href="/menu"
                       onClick={handleSubmit}
                     >
                       Add
@@ -118,4 +106,4 @@ const MenuAddForm = () => {
     </div>
   );
 };
-export default MenuAddForm;
+export default AddCategory;
