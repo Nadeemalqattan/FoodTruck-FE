@@ -65,6 +65,11 @@ const MenuEdit = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleSubmit = () => {
+    // dispatch(menuEdit)
+    console.log(values)
+  };
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -141,6 +146,7 @@ const MenuEdit = () => {
                     required
                     value={values.price}
                     variant="outlined"
+                    type="number"
                   />
                 </Grid>
 
@@ -152,7 +158,7 @@ const MenuEdit = () => {
                       p: 3,
                     }}
                   >
-                    <Button color="primary" variant="contained" href="/menu">
+                    <Button color="primary" variant="contained" href="/menu" onClick={handleSubmit}>
                       Edit
                     </Button>
                   </Box>

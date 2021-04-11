@@ -30,9 +30,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuItem = () => {
+const MenuItem = ({menu}) => {
   const classes = useStyles();
 
+  const handleDelete = () => {
+    alert(`Delete Food #${menu.id}`);
+  };
+  
   return (
     <div className={classes.root}>
       <div className={classes.paper}>
@@ -41,8 +45,8 @@ const MenuItem = () => {
             <ButtonBase className={classes.image}>
               <img
                 className={classes.img}
-                alt="complex"
-                src="https://media-cdn.tripadvisor.com/media/photo-s/15/46/f9/e2/beefroot-patty-aztec.jpg"
+                alt={menu.name}
+                src={menu.image}
               />
             </ButtonBase>
           </Grid>
@@ -50,23 +54,22 @@ const MenuItem = () => {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="h6">
-                  Food1
+                {menu.name}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  Food Description
-                </Typography>
+                {menu.description}</Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Category
+                {menu.category}
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body2" style={{ cursor: "pointer" }}>
+                <Typography variant="body2" style={{ cursor: "pointer" }} onClick={handleDelete}>
                   Remove
                 </Typography>
               </Grid>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1">$19.00</Typography>
+              <Typography variant="subtitle1">BD {menu.price}</Typography>
               <Button
                 variant="contained"
                 className={classes.edit}

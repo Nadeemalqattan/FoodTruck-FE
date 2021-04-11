@@ -15,6 +15,7 @@ import {
 
 /*-------Components-------*/
 import Sidebar from "../Sidebar";
+import { useDispatch } from "react-redux";
 
 const categories = [
   {
@@ -51,11 +52,12 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuAddForm = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
     mealName: "",
     description: "",
     category: "",
-    price: "",
+    price:0,
     image: "",
   });
 
@@ -64,6 +66,11 @@ const MenuAddForm = () => {
       ...values,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleSubmit = () => {
+    // dispatch(menuCreate)
+    console.log(values)
   };
   return (
     <div className={classes.root}>
@@ -88,6 +95,8 @@ const MenuAddForm = () => {
                     required
                     value={values.mealName}
                     variant="outlined"
+                    type="text"
+
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -111,6 +120,8 @@ const MenuAddForm = () => {
                     required
                     value={values.description}
                     variant="outlined"
+                    type="text"
+
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -141,6 +152,8 @@ const MenuAddForm = () => {
                     required
                     value={values.price}
                     variant="outlined"
+                    type="number"
+
                   />
                 </Grid>
 
@@ -152,7 +165,7 @@ const MenuAddForm = () => {
                       p: 3,
                     }}
                   >
-                    <Button color="primary" variant="contained" href="/menu">
+                    <Button color="primary" variant="contained" href="/menu" onClick={handleSubmit} >
                       Add
                     </Button>
                   </Box>

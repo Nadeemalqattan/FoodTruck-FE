@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 /*-------Styling-------*/
 import { HeatMapWrapper } from "../styles";
 
-import MyLocationIcon from "@material-ui/icons/MyLocation";
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 const HeatMap = ({ heatmap }) => {
   const location = useSelector((state) => state.authReducer.location);
   const data = {
@@ -39,7 +39,7 @@ const HeatMap = ({ heatmap }) => {
           heatmapLibrary={true}
           heatmap={data}
         >
-          <MyLocationIcon lat={location.latitude} lng={location.longitude} />
+          <LocalShippingIcon lat={location.latitude} lng={location.longitude} />
         </GoogleMapReact>
       </HeatMapWrapper>
     );
