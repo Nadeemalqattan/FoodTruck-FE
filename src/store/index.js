@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { checkForToken, fetchFoodTruck } from "./actions/authActions";
+import { checkForToken } from "./actions/authActions";
 
 import reducer from "./reducers";
 

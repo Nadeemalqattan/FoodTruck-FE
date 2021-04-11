@@ -16,6 +16,7 @@ import Schedule from "./Schedule";
 
 const Routes = () => {
   const user = useSelector((state) => state.authReducer.user);
+
   return (
     <Switch>
       <Route
@@ -29,7 +30,7 @@ const Routes = () => {
         }}
       />
       <Route
-        path={"/menu/1/add"}
+        path={"/menu/:categoryId/add"}
         component={() => {
           if (user === null) {
             return <Signin />;

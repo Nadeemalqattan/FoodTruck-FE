@@ -16,6 +16,8 @@ import {
 import MenuItem from "./MenuItem";
 import Sidebar from "../Sidebar";
 import datas from "./Data";
+import CategortItem from "./CategoryItem";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,8 +39,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Menu = () => {
   const classes = useStyles();
+  const category = useSelector((state) => state.menuReducer.menu);
+  // console.log("CATEGORY", category[0].FoodItems);
 
-  const menuList = datas.map((menu) => <MenuItem menu={menu} key={menu.id} />);
+  // const menuList = datas.map((menu) => <MenuItem menu={menu} key={menu.id} />);
+  const categoryList = category.map((category) => (
+    <CategortItem category={category} key={category.id} />
+  ));
 
   return (
     <div className={classes.root}>
@@ -50,7 +57,7 @@ const Menu = () => {
             <CardHeader subheader="" title="Menu" />
             <Divider />
             <CardContent>
-              {menuList}
+              {categoryList}
 
               <Grid item md={6} xs={12}>
                 <Box

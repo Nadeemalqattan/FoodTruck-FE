@@ -38,6 +38,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import MapIcon from "@material-ui/icons/Map";
+import { fetchMenu } from "../../store/actions/menuActions";
 
 const drawerWidth = 240;
 
@@ -123,11 +124,11 @@ const Sidebar = () => {
   };
 
   const handleMenu = () => {
+    dispatch(fetchMenu());
     history.push("/menu");
   };
 
   const handleHotspots = () => {
-    
     history.push("/hotspot");
   };
 

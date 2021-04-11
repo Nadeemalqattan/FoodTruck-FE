@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addMenu } from "../../store/actions/menuActions";
 
 /*-------Styling-------*/
 import {
@@ -15,7 +17,6 @@ import {
 
 /*-------Components-------*/
 import Sidebar from "../Sidebar";
-import { useDispatch } from "react-redux";
 
 const categories = [
   {
@@ -53,24 +54,24 @@ const useStyles = makeStyles((theme) => ({
 const MenuAddForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [values, setValues] = useState({
-    mealName: "",
-    description: "",
-    category: "",
-    price:0,
-    image: "",
+  const [menu, setMenu] = useState({
+    name: "",
+    price: 0,
+    // description: "",
+    // category: "",
+    // image: "",
   });
 
   const handleChange = (event) => {
-    setValues({
-      ...values,
+    setMenu({
+      ...menu,
       [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = () => {
-    // dispatch(menuCreate)
-    console.log(values)
+    dispatch(addMenu(menu));
+    console.log(menu);
   };
   return (
     <div className={classes.root}>
@@ -90,16 +91,15 @@ const MenuAddForm = () => {
                   <TextField
                     fullWidth
                     label="Meal name"
-                    name="mealName"
+                    name="name"
                     onChange={handleChange}
                     required
-                    value={values.mealName}
+                    value={menu.name}
                     variant="outlined"
                     type="text"
-
                   />
                 </Grid>
-                <Grid item md={6} xs={12}>
+                {/* <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
                     type="file"
@@ -107,7 +107,7 @@ const MenuAddForm = () => {
                     name="image"
                     onChange={handleChange}
                     required
-                    value={values.image}
+                    value={menu.image}
                     variant="outlined"
                   />
                 </Grid>
@@ -118,7 +118,7 @@ const MenuAddForm = () => {
                     name="description"
                     onChange={handleChange}
                     required
-                    value={values.description}
+                    value={menu.description}
                     variant="outlined"
                     type="text"
 
@@ -133,7 +133,7 @@ const MenuAddForm = () => {
                     required
                     select
                     SelectProps={{ native: true }}
-                    value={values.category}
+                    value={menu.category}
                     variant="outlined"
                   >
                     {categories.map((option) => (
@@ -142,7 +142,7 @@ const MenuAddForm = () => {
                       </option>
                     ))}
                   </TextField>
-                </Grid>
+                </Grid> */}
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
@@ -150,10 +150,9 @@ const MenuAddForm = () => {
                     name="price"
                     onChange={handleChange}
                     required
-                    value={values.price}
+                    value={menu.price}
                     variant="outlined"
                     type="number"
-
                   />
                 </Grid>
 
@@ -165,7 +164,12 @@ const MenuAddForm = () => {
                       p: 3,
                     }}
                   >
-                    <Button color="primary" variant="contained" href="/menu" onClick={handleSubmit} >
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      // href="/menu"
+                      onClick={handleSubmit}
+                    >
                       Add
                     </Button>
                   </Box>

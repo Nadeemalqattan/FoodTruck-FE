@@ -18,8 +18,6 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 
-
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -42,14 +40,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Signin = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
-
-  const dispatch = useDispatch();
-  const history = useHistory();
 
   const handleChange = (event) =>
     setUser({ ...user, [event.target.name]: event.target.value });

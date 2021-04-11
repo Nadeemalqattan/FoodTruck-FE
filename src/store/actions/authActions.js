@@ -66,7 +66,7 @@ export const fetchHeatmap = () => {
   };
 };
 
-/*-------Uodate Profile-------*/
+/*-------Update Profile-------*/
 export const updateProfile = (updatedProfile) => {
   return async (dispatch) => {
     try {
