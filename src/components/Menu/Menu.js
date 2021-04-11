@@ -15,6 +15,7 @@ import {
 /*-------Components-------*/
 import MenuItem from "./MenuItem";
 import Sidebar from "../Sidebar";
+import datas from "./Data";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
 const Menu = () => {
   const classes = useStyles();
 
+  const menuList = datas.map((menu) => <MenuItem menu={menu} key={menu.id} />);
+
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -47,8 +50,7 @@ const Menu = () => {
             <CardHeader subheader="" title="Menu" />
             <Divider />
             <CardContent>
-              <MenuItem />
-              <MenuItem />
+              {menuList}
 
               <Grid item md={6} xs={12}>
                 <Box
@@ -58,8 +60,15 @@ const Menu = () => {
                     p: 3,
                   }}
                 >
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    href="/menu/1/add"
+                  >
+                    Add Menu
+                  </Button>
                   <Button color="primary" variant="contained" href="/menu/add">
-                    Add
+                    Add Category
                   </Button>
                 </Box>
               </Grid>

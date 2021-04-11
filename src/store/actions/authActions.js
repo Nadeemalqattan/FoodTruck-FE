@@ -2,6 +2,8 @@ import instance from "./instance";
 import decode from "jwt-decode";
 import * as types from "../types";
 
+import { toast } from "react-toastify";
+
 const setUser = (token) => {
   localStorage.setItem("myToken", token);
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -11,6 +13,7 @@ const setUser = (token) => {
   };
 };
 
+/*-------Sigin-------*/
 export const signin = (user) => {
   return async (dispatch) => {
     try {
@@ -23,6 +26,7 @@ export const signin = (user) => {
   };
 };
 
+/*-------Sigout-------*/
 export const signout = () => {
   localStorage.removeItem("myToken");
   delete instance.defaults.headers.common.Authorization;
@@ -32,6 +36,7 @@ export const signout = () => {
   };
 };
 
+/*-------Ftch Food Trucks-------*/
 export const fetchFoodTruck = () => {
   return async (dispatch) => {
     try {
@@ -45,6 +50,8 @@ export const fetchFoodTruck = () => {
     }
   };
 };
+
+/*-------Feych Heatmap Users-------*/
 export const fetchHeatmap = () => {
   return async (dispatch) => {
     try {
@@ -59,6 +66,7 @@ export const fetchHeatmap = () => {
   };
 };
 
+/*-------Uodate Profile-------*/
 export const updateProfile = (updatedProfile) => {
   return async (dispatch) => {
     try {
@@ -76,6 +84,7 @@ export const updateProfile = (updatedProfile) => {
   };
 };
 
+/*-------check For Token-------*/
 export const checkForToken = () => (dispatch) => {
   const token = localStorage.getItem("myToken");
   if (token) {
@@ -90,6 +99,7 @@ export const checkForToken = () => (dispatch) => {
   }
 };
 
+/*-------Get food Trcuk Location-------*/
 export const getLocation = (longitude, latitude, foodTruckID) => async (
   dispatch
 ) => {
@@ -100,8 +110,8 @@ export const getLocation = (longitude, latitude, foodTruckID) => async (
     });
     dispatch({
       type: types.GET_LOCATION,
-      payload: {latitude,longitude},
-    })
+      payload: { latitude, longitude },
+    });
   } catch (error) {
     console.log(error);
   }

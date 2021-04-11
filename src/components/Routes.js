@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Hotspots from "./Hotspots";
 import Home from "./Home";
 import Menu from "./Menu/Menu";
+import AddCategory from "./Menu/AddCategory";
 import MenuAddForm from "./Menu/MenuAddForm";
 import MenuEditForm from "./Menu/MenuEditForm";
 import Signin from "./Signin";
@@ -19,6 +20,16 @@ const Routes = () => {
     <Switch>
       <Route
         path={"/menu/add"}
+        component={() => {
+          if (user === null) {
+            return <Signin />;
+          } else if (user) {
+            return <AddCategory />;
+          }
+        }}
+      />
+      <Route
+        path={"/menu/1/add"}
         component={() => {
           if (user === null) {
             return <Signin />;

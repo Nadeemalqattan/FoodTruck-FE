@@ -1,4 +1,3 @@
-import { TvRounded } from "@material-ui/icons";
 import * as types from "../types";
 
 const initialState = {
