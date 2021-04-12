@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 /*-------Styling-------*/
 import {
   Box,
@@ -16,6 +16,10 @@ import {
 
 /*-------Components-------*/
 import Sidebar from "../Sidebar";
+import {
+  editWorkingHours,
+  fetchWorkingHours,
+} from "../../store/actions/workingHoursActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,55 +40,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Schedule = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const [schedule, setSchedule] = useState([
-    {
-      days: "Sunday",
-      openTime: "",
-      closeTime: "",
-    },
-    {
-      days: "Monday",
-      openTime: "",
-      closeTime: "",
-    },
-    {
-      days: "Tuesday",
-      openTime: "",
-      closeTime: "",
-    },
-    {
-      days: "Wednesday",
-      openTime: "",
-      closeTime: "",
-    },
-    {
-      days: "Thursday",
-      openTime: "",
-      closeTime: "",
-    },
-    {
-      days: "Friday",
-      openTime: "",
-      closeTime: "",
-    },
-    {
-      days: "Saturday",
-      openTime: "",
-      closeTime: "10 AM",
-    },
-  ]);
-
+  const state = useSelector((state) => state.workingHoursReducer.workingHours);
+  const loading = useSelector((state) => state.workingHoursReducer.loading);
+  const [stateHours, setState] = useState({
+    openTime: "",
+    closeTime: "",
+  });
   const handleChange = (event) => {
-    setSchedule({
-      ...schedule,
-      [event.target.name]: event.target.value,
+    setState({ ...stateHours, [event.target.name]: event.target.value });
+  };
+  const handleSubmit = (workingDayId, stateHours) => {
+    console.log(workingDayId, stateHours);
+    dispatch(editWorkingHours(workingDayId, stateHours));
+    setState({
+      openTime: "",
+      closeTime: "",
     });
   };
-  console.log(schedule.map((x) => x));
 
-  const formList = schedule.map((day) => (
+  const formList = state.map((day) => (
     <>
+      <Grid
+        item
+        md={1}
+        xs={12}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignSelf: "center",
+        }}
+      >
+        <div className="">{day.days}</div>
+      </Grid>
       <Grid
         item
         md={2}
@@ -95,29 +84,57 @@ const Schedule = () => {
           alignSelf: "center",
         }}
       >
-        <div className="h6">{day.days}</div>
+        <Typography>{day.openTime}</Typography>
       </Grid>
-      <Grid item md={5} xs={12}>
+      <Grid
+        item
+        md={2}
+        xs={12}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignSelf: "center",
+        }}
+      >
+        <Typography>{day.closeTime}</Typography>
+      </Grid>
+      <Grid item md={3} xs={12}>
         <TextField
           fullWidth
           label="Opening Hours"
-          name="startDate"
+          name="openTime"
           onChange={handleChange}
           required
-          value={day.openTime}
           variant="outlined"
         />
       </Grid>
-      <Grid item md={5} xs={12}>
+      <Grid item md={3} xs={12}>
         <TextField
           fullWidth
           label="Closing Hours"
-          name="startDate"
+          name="closeTime"
           onChange={handleChange}
           required
-          value={day.closeTime}
           variant="outlined"
         />
+      </Grid>
+      <Grid
+        item
+        md={1}
+        xs={12}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignSelf: "center",
+        }}
+      >
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => handleSubmit(day.id, stateHours)}
+        >
+          Edit
+        </Button>
       </Grid>
     </>
   ));
@@ -128,12 +145,12 @@ const Schedule = () => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <form autoComplete="off" noValidate>
-          <Card>
+          <Card className="p-1">
             <CardHeader subheader="" title="Food Truck Schedule" />
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
-                {formList}
+                {loading ? "Loading" : formList}
                 <Grid item md={6} xs={12}>
                   <Box
                     sx={{
@@ -141,11 +158,7 @@ const Schedule = () => {
                       justifyContent: "flex-end",
                       p: 3,
                     }}
-                  >
-                    <Button color="primary" variant="contained" href="/menu">
-                      Add
-                    </Button>
-                  </Box>
+                  ></Box>
                 </Grid>
               </Grid>
             </CardContent>
