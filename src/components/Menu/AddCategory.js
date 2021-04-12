@@ -55,7 +55,7 @@ const AddCategory = () => {
 
   const handleSubmit = () => {
     dispatch(addCategory(category));
-    history.replace("/menu");
+    history.push("/menu");
   };
   return (
     <div className={classes.root}>

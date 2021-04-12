@@ -11,6 +11,7 @@ import {
   Grid,
   TextField,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 
 /*-------Components-------*/
@@ -36,10 +37,43 @@ const useStyles = makeStyles((theme) => ({
 
 const Schedule = () => {
   const classes = useStyles();
-  const [schedule, setSchedule] = useState({
-    startDate: "",
-    endDate: "",
-  });
+  const [schedule, setSchedule] = useState([
+    {
+      days: "Sunday",
+      openTime: "",
+      closeTime: "",
+    },
+    {
+      days: "Monday",
+      openTime: "",
+      closeTime: "",
+    },
+    {
+      days: "Tuesday",
+      openTime: "",
+      closeTime: "",
+    },
+    {
+      days: "Wednesday",
+      openTime: "",
+      closeTime: "",
+    },
+    {
+      days: "Thursday",
+      openTime: "",
+      closeTime: "",
+    },
+    {
+      days: "Friday",
+      openTime: "",
+      closeTime: "",
+    },
+    {
+      days: "Saturday",
+      openTime: "",
+      closeTime: "10 AM",
+    },
+  ]);
 
   const handleChange = (event) => {
     setSchedule({
@@ -47,6 +81,47 @@ const Schedule = () => {
       [event.target.name]: event.target.value,
     });
   };
+  console.log(schedule.map((x) => x));
+
+  const formList = schedule.map((day) => (
+    <>
+      <Grid
+        item
+        md={2}
+        xs={12}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignSelf: "center",
+        }}
+      >
+        <div className="h6">{day.days}</div>
+      </Grid>
+      <Grid item md={5} xs={12}>
+        <TextField
+          fullWidth
+          label="Opening Hours"
+          name="startDate"
+          onChange={handleChange}
+          required
+          value={day.openTime}
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item md={5} xs={12}>
+        <TextField
+          fullWidth
+          label="Closing Hours"
+          name="startDate"
+          onChange={handleChange}
+          required
+          value={day.closeTime}
+          variant="outlined"
+        />
+      </Grid>
+    </>
+  ));
+
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -58,39 +133,7 @@ const Schedule = () => {
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    type="datetime-local"
-                    label="Start Date/Time"
-                    defaultValue="mm/dd/yyyy, --:-- --"
-                    name="startDate"
-                    onChange={handleChange}
-                    required
-                    value={schedule.startDates}
-                    variant="outlined"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    type="datetime-local"
-                    label="End Date/Time"
-                    defaultValue="mm/dd/yyyy, --:-- --"
-                    name="endDate"
-                    onChange={handleChange}
-                    required
-                    value={schedule.endDate}
-                    variant="outlined"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Grid>
-
+                {formList}
                 <Grid item md={6} xs={12}>
                   <Box
                     sx={{

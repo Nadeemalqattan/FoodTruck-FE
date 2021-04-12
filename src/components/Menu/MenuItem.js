@@ -1,15 +1,16 @@
 import React from "react";
-
+import { useDispatch } from "react-redux";
 /*-------Styling-------*/
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { Button } from "@material-ui/core";
+import { deleteMenu } from "../../store/actions/menuActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 4,
   },
   paper: {
     padding: theme.spacing(2),
@@ -30,11 +31,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuItem = ({ menu }) => {
+const MenuItem = ({ menu, categoryID }) => {
   const classes = useStyles();
-
-  const handleDelete = () => {
-    alert(`Delete Food #${menu.id}`);
+  const dispatch = useDispatch();
+  const handleDelete = (categoryID, menuId) => {
+    dispatch(deleteMenu(categoryID, menuId));
   };
 
   return (
@@ -43,7 +44,11 @@ const MenuItem = ({ menu }) => {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <img className={classes.img} alt={menu.name} src={menu.image} />
+              <img
+                className={classes.img}
+                alt={menu.name}
+                src="https://dummyimage.com/600x400/000/fff"
+              />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
@@ -52,18 +57,12 @@ const MenuItem = ({ menu }) => {
                 <Typography gutterBottom variant="h6">
                   {menu.name}
                 </Typography>
-                <Typography variant="body2" gutterBottom>
-                  {menu.description}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {menu.category}
-                </Typography>
               </Grid>
               <Grid item>
                 <Typography
                   variant="body2"
                   style={{ cursor: "pointer" }}
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(categoryID, menu.id)}
                 >
                   Remove
                 </Typography>
@@ -71,11 +70,7 @@ const MenuItem = ({ menu }) => {
             </Grid>
             <Grid item>
               <Typography variant="subtitle1">BD {menu.price}</Typography>
-              <Button
-                variant="contained"
-                className={classes.edit}
-                href="/menu/edit"
-              >
+              <Button variant="contained" className={classes.edit}>
                 Edit
               </Button>
             </Grid>
