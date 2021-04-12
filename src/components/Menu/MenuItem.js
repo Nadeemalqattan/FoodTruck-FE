@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 /*-------Styling-------*/
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -52,28 +54,52 @@ const MenuItem = ({ menu, categoryID }) => {
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
+            <Grid item xs container spacing={2}>
+              <Grid
+                item
+                xs
+                style={{ alignSelf: "center", marginBottom: "20%" }}
+              >
                 <Typography gutterBottom variant="h6">
                   {menu.name}
                 </Typography>
+                <Typography variant="subtitle1">BD {menu.price}</Typography>
               </Grid>
               <Grid item>
                 <Typography
                   variant="body2"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: "red" }}
                   onClick={() => handleDelete(categoryID, menu.id)}
                 >
                   Remove
                 </Typography>
+                <Link
+                  color="primary"
+                  variant="contained"
+                  to={{
+                    pathname: `/menu/${categoryID}/edit/${menu.id}`,
+                  }}
+                >
+                  <Button variant="contained" style={{ marginTop: "30%" }}>
+                    Edit
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant="subtitle1">BD {menu.price}</Typography>
-              <Button variant="contained" className={classes.edit}>
-                Edit
-              </Button>
-            </Grid>
+            {/* <Grid item>
+              <Link
+                color="primary"
+                variant="contained"
+                to={{
+                  pathname: `/menu/${categoryID}/edit/${menu.id}`,
+                }}
+                style={{ textDecoration: "none" }}
+              >
+                <Button variant="contained" className={classes.edit}>
+                  Edit
+                </Button>
+              </Link>
+            </Grid> */}
           </Grid>
         </Grid>
       </div>

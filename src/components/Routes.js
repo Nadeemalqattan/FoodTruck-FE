@@ -1,6 +1,6 @@
 /*-------React-------*/
 import { Route, Switch } from "react-router";
-import { useSelector ,useDispatch} from "react-redux";
+import { useSelector } from "react-redux";
 
 /*-------Routes-------*/
 import Hotspots from "./Hotspots";
@@ -15,8 +15,6 @@ import Location from "./Location";
 import Schedule from "./Schedule";
 
 const Routes = () => {
-  const dispatch = useDispatch();
-
   const user = useSelector((state) => state.authReducer.user);
 
   return (
@@ -42,7 +40,7 @@ const Routes = () => {
         }}
       />
       <Route
-        path={"/menu/edit"}
+        path={"/menu/:categoryId/edit/:menuId"}
         component={() => {
           if (user === null) {
             return <Signin />;

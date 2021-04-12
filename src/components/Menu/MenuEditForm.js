@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { updateMenu } from "../../store/actions/menuActions";
 
 /*-------Styling-------*/
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -13,23 +15,10 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
+import Button from "@material-ui/core/Button";
+
 /*-------Components-------*/
 import Sidebar from "../Sidebar";
-
-const categories = [
-  {
-    value: "american",
-    label: "American",
-  },
-  {
-    value: "arabic",
-    label: "Arabic",
-  },
-  {
-    value: "asian",
-    label: "Asian",
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,13 +39,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MenuEdit = () => {
+  const { categoryId } = useParams();
+  const { menuId } = useParams();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const category = useSelector((state) =>
+    state.menuReducer.menu.find((category) => category.id === +categoryId)
+  );
+
+  const menu = category.FoodItems.find((menu) => menu.id === +menuId);
+
+  console.log("category it", categoryId);
+
   const classes = useStyles();
   const [values, setValues] = useState({
-    mealName: "",
-    description: "",
-    category: "",
-    price: "",
-    image: "",
+    mealName: menu.name,
+    // description: "",
+    // category: "",
+    price: menu.price,
+    // image: "",
   });
 
   const handleChange = (event) => {
@@ -67,8 +69,8 @@ const MenuEdit = () => {
   };
 
   const handleSubmit = () => {
-    // dispatch(menuEdit)
-    console.log(values)
+    dispatch(updateMenu(categoryId, menuId, values));
+    history.push("/menu");
   };
   return (
     <div className={classes.root}>
@@ -95,7 +97,7 @@ const MenuEdit = () => {
                     variant="outlined"
                   />
                 </Grid>
-                <Grid item md={6} xs={12}>
+                {/* <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
                     type="file"
@@ -136,7 +138,7 @@ const MenuEdit = () => {
                       </option>
                     ))}
                   </TextField>
-                </Grid>
+                </Grid> */}
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
@@ -158,7 +160,12 @@ const MenuEdit = () => {
                       p: 3,
                     }}
                   >
-                    <Button color="primary" variant="contained" href="/menu" onClick={handleSubmit}>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      href="/menu"
+                      onClick={handleSubmit}
+                    >
                       Edit
                     </Button>
                   </Box>
