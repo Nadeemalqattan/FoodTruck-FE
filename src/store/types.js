@@ -10,4 +10,5 @@ export const GET_LOCATION = "GET_LOCATION";
 //CATEGORY
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const FETCH_MENU = "FETCH_MENU";
-export const ADD_MENU = "ADD_MENU";
+export const ADD_ITEM = "ADD_ITEM";
+export const DELETE_MENU = "DELETE_MENU";

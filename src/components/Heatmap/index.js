@@ -17,7 +17,7 @@ const HeatMap = ({ heatmap }) => {
     },
   };
   if (location === null) {
-    return <div>Please Update location</div>;
+    return <div className="mt-4">Please Update location</div>;
   } else {
     const defaultProps = {
       center: {
@@ -28,7 +28,8 @@ const HeatMap = ({ heatmap }) => {
     };
 
     return (
-      <HeatMapWrapper>
+      <div className="mt-4">
+        <HeatMapWrapper>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: ["AIzaSyDGEXF_vPRNiDEsTwSPA3lkJ9gKDc-n44w"],
@@ -42,6 +43,7 @@ const HeatMap = ({ heatmap }) => {
           <LocalShippingIcon lat={location.latitude} lng={location.longitude} />
         </GoogleMapReact>
       </HeatMapWrapper>
+      </div>
     );
   }
 };

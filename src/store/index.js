@@ -1,6 +1,7 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { checkForToken } from "./actions/authActions";
+import { fetchMenu } from "./actions/menuActions";
 
 import reducer from "./reducers";
 

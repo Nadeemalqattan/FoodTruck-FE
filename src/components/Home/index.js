@@ -28,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  dispatch(fetchFoodTruck());
   return (
     <>
       <div className={classes.root}>

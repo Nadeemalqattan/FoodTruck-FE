@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addMenu } from "../../store/actions/menuActions";
-
+import { useLocation, useHistory } from "react-router-dom";
 /*-------Styling-------*/
 import {
   Box,
@@ -52,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MenuAddForm = () => {
+  const location = useLocation();
+  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [menu, setMenu] = useState({
@@ -70,8 +72,8 @@ const MenuAddForm = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(addMenu(menu));
-    console.log(menu);
+    dispatch(addMenu(menu, location.state.categoryID));
+    history.push("/menu");
   };
   return (
     <div className={classes.root}>

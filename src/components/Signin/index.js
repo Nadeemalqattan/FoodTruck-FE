@@ -17,6 +17,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import { fetchMenu } from "../../store/actions/menuActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,7 +55,7 @@ const Signin = () => {
   const handleSignin = (event) => {
     event.preventDefault();
     dispatch(signin(user, fetchFoodTruck));
-    history.replace("/");
+    history.push("/");
   };
 
   return (

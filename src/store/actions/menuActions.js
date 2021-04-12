@@ -5,7 +5,7 @@ import * as types from "../types";
 export const fetchMenu = () => async (dispatch) => {
   try {
     const res = await instance.get("foodtruck/menu/");
-    console.log(res.data);
+    console.log("fetched menu");
     dispatch({
       type: types.FETCH_MENU,
       payload: res.data,
@@ -16,12 +16,14 @@ export const fetchMenu = () => async (dispatch) => {
 };
 
 /*-------Add Menu-------*/
-export const addMenu = (foodcategory) => async (dispatch) => {
+export const addMenu = (foodcategory, categoryID) => async (dispatch) => {
   try {
-    console.log(foodcategory);
-    const res = await instance.post(`foodtruck/menu/${foodcategory.id}/add`);
+    const res = await instance.post(
+      `foodtruck/menu/${categoryID}/add`,
+      foodcategory
+    );
     dispatch({
-      type: types.ADD_MENU,
+      type: types.ADD_ITEM,
       payload: res.data,
     });
   } catch (error) {
@@ -45,27 +47,40 @@ export const addMenu = (foodcategory) => async (dispatch) => {
 // };
 
 /*-------Delete Menu-------*/
-// export const deleteMenu = (menuId) => async (dispatch) => {
-//   try {
-//     const res = await instance.delete("");
-//     console.log(res.data);
-//     dispatch({
-//       type: types.DELETE_MENU,
-//       payload: { menuId },
-//     });
-//   } catch (error) {
-//     console.log("ERROR: ", error);
-//   }
-// };
+export const deleteMenu = (categoryID, menuId) => async (dispatch) => {
+  try {
+    const res = await instance.delete(
+      `foodtruck/menu/${categoryID}/delete/${menuId}`
+    );
+    dispatch({
+      type: types.DELETE_MENU,
+      payload: { categoryID, menuId },
+    });
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+};
 
 /*-------Add Category-------*/
 export const addCategory = (category) => async (dispatch) => {
   try {
     const res = await instance.post("foodtruck/menu/add", category);
-    console.log(res.data);
     dispatch({
       type: types.ADD_CATEGORY,
       payload: res.data,
+    });
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+};
+
+/*-------Remove Category-------*/
+export const removeCategory = (categoryID) => async (dispatch) => {
+  try {
+    const res = await instance.delete(`foodtruck/menu/${categoryID}`);
+    dispatch({
+      type: "DELETE_CATEGORY",
+      payload: categoryID,
     });
   } catch (error) {
     console.log("ERROR: ", error);

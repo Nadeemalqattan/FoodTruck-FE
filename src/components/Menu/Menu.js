@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 /*-------Styling-------*/
 import {
   Box,
@@ -17,7 +17,8 @@ import MenuItem from "./MenuItem";
 import Sidebar from "../Sidebar";
 import datas from "./Data";
 import CategortItem from "./CategoryItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMenu } from "../../store/actions/menuActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,14 +40,21 @@ const useStyles = makeStyles((theme) => ({
 
 const Menu = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const category = useSelector((state) => state.menuReducer.menu);
+  const isDataLoaded = useSelector((state) => state.menuReducer.isDataLoaded);
   // console.log("CATEGORY", category[0].FoodItems);
 
   // const menuList = datas.map((menu) => <MenuItem menu={menu} key={menu.id} />);
   const categoryList = category.map((category) => (
     <CategortItem category={category} key={category.id} />
   ));
-
+  useEffect(() => {
+    if (!isDataLoaded) {
+      dispatch(fetchMenu());
+    }
+  }, [dispatch]);
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -56,9 +64,18 @@ const Menu = () => {
           <Card>
             <CardHeader subheader="" title="Menu" />
             <Divider />
-            <CardContent>
-              {categoryList}
 
+            <CardContent>
+              <Link to="/menu/add" style={{ textDecoration: "none" }}>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  style={{ marginBottom: "10px" }}
+                >
+                  Add Category
+                </Button>
+              </Link>
+              {categoryList}
               <Grid item md={6} xs={12}>
                 <Box
                   sx={{
@@ -66,18 +83,7 @@ const Menu = () => {
                     justifyContent: "flex-end",
                     p: 3,
                   }}
-                >
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    href="/menu/1/add"
-                  >
-                    Add Menu
-                  </Button>
-                  <Button color="primary" variant="contained" href="/menu/add">
-                    Add Category
-                  </Button>
-                </Box>
+                ></Box>
               </Grid>
             </CardContent>
           </Card>

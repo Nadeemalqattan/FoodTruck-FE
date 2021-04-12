@@ -39,6 +39,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import MapIcon from "@material-ui/icons/Map";
 import { fetchMenu } from "../../store/actions/menuActions";
+import { fetchWorkingHours } from "../../store/actions/workingHoursActions";
 
 const drawerWidth = 240;
 
@@ -124,16 +125,15 @@ const Sidebar = () => {
   };
 
   const handleMenu = () => {
-    dispatch(fetchMenu());
     history.push("/menu");
   };
 
   const handleHotspots = () => {
+    dispatch(fetchFoodTruck());
     history.push("/hotspot");
   };
 
   const handleProfile = () => {
-    dispatch(fetchFoodTruck());
     history.push("/profile");
   };
 
@@ -143,6 +143,7 @@ const Sidebar = () => {
   };
 
   const handleSchedule = () => {
+    dispatch(fetchWorkingHours());
     history.replace("/schedule");
   };
 
@@ -205,12 +206,6 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText primary="Schedule" />
           </ListItem>
-          <ListItem button onClick={handleLocation}>
-            <ListItemIcon>
-              <RoomIcon />
-            </ListItemIcon>
-            <ListItemText primary="Location" />
-          </ListItem>
           <ListItem button onClick={handleMenu}>
             <ListItemIcon>
               <ListIcon />
@@ -223,12 +218,7 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText primary="Customer Hotspot" />
           </ListItem>
-          <ListItem button onClick={handleProfile}>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="profile" />
-          </ListItem>
+
           <ListItem button onClick={handleSignout}>
             <ListItemIcon>
               <ExitToAppIcon />
