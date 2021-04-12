@@ -45,17 +45,14 @@ const menuReducer = (state = initialState, action) => {
       const filteredMenu = state.menu.filter(
         (menu) => menu.id !== action.payload
       );
-      console.log(action.payload);
       return {
         ...state,
         menu: filteredMenu,
       };
     case types.DELETE_MENU:
-      console.log(action.payload);
       const index1 = state.menu.findIndex(
         (category) => category.id === action.payload.categoryID
       );
-      console.log(index1);
       const newMenuStateDeleteItem = [...state.menu];
       newMenuStateDeleteItem[index1].FoodItems = newMenuStateDeleteItem[
         index1
