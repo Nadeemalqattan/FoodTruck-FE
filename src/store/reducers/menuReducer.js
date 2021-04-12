@@ -65,6 +65,13 @@ const menuReducer = (state = initialState, action) => {
         ...state,
         menu: newMenuStateDeleteItem,
       };
+
+    case "UPDATE_MENU":
+      return {
+        ...state,
+        menu: action.payload.updateMenu,
+      };
+
     default:
       return state;
   }

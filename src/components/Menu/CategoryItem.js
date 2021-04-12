@@ -4,7 +4,6 @@ import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
-import datas from "./Data";
 import MenuItem from "./MenuItem";
 import { Box, Button, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -12,6 +11,7 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch } from "react-redux";
 import { removeCategory } from "../../store/actions/menuActions";
+
 const Accordion = withStyles({
   root: {
     border: "1px solid rgba(0, 0, 0, .125)",
@@ -58,10 +58,15 @@ const CategortItem = ({ category }) => {
   const menuList = category.FoodItems.map((menu) => (
     <MenuItem menu={menu} key={menu.id} categoryID={category.id} />
   ));
+
   const handleDelete = (categoryId) => {
-    console.log("sd");
     dispatch(removeCategory(categoryId));
   };
+
+  // const handleEdit = (categoryId) => {
+  //   dispatch(removeCategory(categoryId));
+  // };
+
   return (
     <div>
       <Accordion square>

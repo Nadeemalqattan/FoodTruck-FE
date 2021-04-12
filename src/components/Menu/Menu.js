@@ -44,9 +44,7 @@ const Menu = () => {
 
   const category = useSelector((state) => state.menuReducer.menu);
   const isDataLoaded = useSelector((state) => state.menuReducer.isDataLoaded);
-  // console.log("CATEGORY", category[0].FoodItems);
-
-  // const menuList = datas.map((menu) => <MenuItem menu={menu} key={menu.id} />);
+  console.log(category);
   const categoryList = category.map((category) => (
     <CategortItem category={category} key={category.id} />
   ));
