@@ -1,35 +1,25 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
-/*-------Styling-------*/
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+/*-------Styling-------*/
 import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import { Button } from "@material-ui/core";
 import { deleteMenu } from "../../store/actions/menuActions";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
-    flexGrow: 4,
+    width: 200,
+    margin: 10,
   },
-  paper: {
-    padding: theme.spacing(2),
-    maxWidth: 1000,
-  },
-  edit: {
-    marginTop: 70,
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: "auto",
-    display: "block",
-    maxWidth: "100%",
-    maxHeight: "100%",
+  media: {
+    height: 170,
   },
 }));
 
@@ -39,71 +29,52 @@ const MenuItem = ({ menu, categoryID }) => {
   const handleDelete = (categoryID, menuId) => {
     dispatch(deleteMenu(categoryID, menuId));
   };
-
   return (
-    <div className={classes.root}>
-      <div className={classes.paper}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase className={classes.image}>
-              <img
-                className={classes.img}
-                alt={menu.name}
-                src="https://dummyimage.com/600x400/000/fff"
-              />
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container spacing={2}>
-              <Grid
-                item
-                xs
-                style={{ alignSelf: "center", marginBottom: "20%" }}
-              >
-                <Typography gutterBottom variant="h6">
-                  {menu.name}
-                </Typography>
-                <Typography variant="subtitle1">BD {menu.price}</Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  variant="body2"
-                  style={{ cursor: "pointer", color: "red" }}
-                  onClick={() => handleDelete(categoryID, menu.id)}
-                >
-                  Remove
-                </Typography>
-                <Link
-                  color="primary"
-                  variant="contained"
-                  to={{
-                    pathname: `/menu/${categoryID}/edit/${menu.id}`,
-                  }}
-                >
-                  <Button variant="contained" style={{ marginTop: "30%" }}>
-                    Edit
-                  </Button>
-                </Link>
-              </Grid>
-            </Grid>
-            {/* <Grid item>
-              <Link
-                color="primary"
-                variant="contained"
-                to={{
-                  pathname: `/menu/${categoryID}/edit/${menu.id}`,
-                }}
-                style={{ textDecoration: "none" }}
-              >
-                <Button variant="contained" className={classes.edit}>
-                  Edit
-                </Button>
-              </Link>
-            </Grid> */}
-          </Grid>
-        </Grid>
-      </div>
-    </div>
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image={menu.image}
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              marginBottom: 5,
+            }}
+          >
+            <Typography gutterBottom variant="h5" component="h2">
+              {menu.name}
+            </Typography>
+            <Typography variant="subtitle1">BD {menu.price}</Typography>
+          </div>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {menu.description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions style={{ justifyContent: "flex-end" }}>
+        <Typography
+          variant="body2"
+          style={{ cursor: "pointer", color: "red" }}
+          onClick={() => handleDelete(categoryID, menu.id)}
+        >
+          <DeleteIcon />
+        </Typography>
+        <Link
+          color="primary"
+          variant="contained"
+          to={{
+            pathname: `/menu/${categoryID}/edit/${menu.id}`,
+          }}
+        >
+          <EditIcon />
+        </Link>
+      </CardActions>
+    </Card>
   );
 };
 export default MenuItem;

@@ -33,6 +33,7 @@ const menuReducer = (state = initialState, action) => {
         id: action.payload.id,
         name: action.payload.name,
         price: action.payload.price,
+        image: action.payload.image,
       };
       const newMenuState = [...state.menu];
       newMenuState[index].FoodItems.push(foodItem);
@@ -57,13 +58,34 @@ const menuReducer = (state = initialState, action) => {
       newMenuStateDeleteItem[index1].FoodItems = newMenuStateDeleteItem[
         index1
       ].FoodItems.filter((item) => item.id !== action.payload.menuId);
-      console.log(newMenuStateDeleteItem);
       return {
         ...state,
         menu: newMenuStateDeleteItem,
       };
 
     case "UPDATE_MENU":
+      // const index2 = state.menu.findIndex(
+      //   (category) => category.id === action.payload.FoodCategoryId
+      // );
+      // const index3 = state.menu[index2].FoodItems.findIndex(
+      //   (item) => item.id === action.payload.id
+      // );
+      // const foodItemUpdated = {
+      //   id: action.payload.id,
+      //   name: action.payload.name,
+      //   price: action.payload.price,
+      //   image: action.payload.image,
+      //   description: action.payload.description,
+      // };
+      // console.log(foodItemUpdated);
+      // const newUpdaedState = [...state.menu];
+      // newUpdaedState[index2].FoodItems[index3] = foodItemUpdated;
+      // console.log(newUpdaedState);
+      // return {
+      //   ...state,
+      //   menu: newUpdaedState,
+      // };
+
       return {
         ...state,
         menu: action.payload.updateMenu,

@@ -63,10 +63,6 @@ const CategortItem = ({ category }) => {
     dispatch(removeCategory(categoryId));
   };
 
-  // const handleEdit = (categoryId) => {
-  //   dispatch(removeCategory(categoryId));
-  // };
-
   return (
     <div>
       <Accordion square>
@@ -98,15 +94,6 @@ const CategortItem = ({ category }) => {
             <AddIcon fontSize="large" />
           </Link>
           {menuList}
-          <Grid item md={12} xs={12}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                p: 3,
-              }}
-            ></Box>
-          </Grid>
         </AccordionDetails>
       </Accordion>
     </div>

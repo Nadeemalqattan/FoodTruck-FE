@@ -18,9 +18,15 @@ export const fetchMenu = () => async (dispatch) => {
 /*-------Add Menu-------*/
 export const addMenu = (foodcategory, categoryID) => async (dispatch) => {
   try {
+    const formData = new FormData();
+
+    for (const iterator in foodcategory) {
+      formData.append(iterator, foodcategory[iterator]);
+    }
+
     const res = await instance.post(
       `foodtruck/menu/${categoryID}/add`,
-      foodcategory
+      formData
     );
     dispatch({
       type: types.ADD_ITEM,
@@ -35,13 +41,19 @@ export const addMenu = (foodcategory, categoryID) => async (dispatch) => {
 export const updateMenu = (categoryID, menuId, updateMenu) => {
   return async (dispatch) => {
     try {
+
+      const formData = new FormData();
+      for (const iterator in updateMenu) {
+        formData.append(iterator, updateMenu[iterator]);
+      }
       const res = await instance.put(
         `foodtruck/menu/${categoryID}/edit/${menuId}`,
-        updateMenu
+        formData
       );
+      console.log(res.data);
       dispatch({
         type: "UPDATE_MENU",
-        payload: { updateMenu: res.data },
+        payload: res.data,
       });
     } catch (error) {
       console.log("error:", error);

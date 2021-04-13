@@ -13,9 +13,7 @@ import {
 } from "@material-ui/core";
 
 /*-------Components-------*/
-import MenuItem from "./MenuItem";
 import Sidebar from "../Sidebar";
-import datas from "./Data";
 import CategortItem from "./CategoryItem";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMenu } from "../../store/actions/menuActions";
@@ -44,7 +42,6 @@ const Menu = () => {
 
   const category = useSelector((state) => state.menuReducer.menu);
   const isDataLoaded = useSelector((state) => state.menuReducer.isDataLoaded);
-  console.log(category);
   const categoryList = category.map((category) => (
     <CategortItem category={category} key={category.id} />
   ));
@@ -74,6 +71,7 @@ const Menu = () => {
                 </Button>
               </Link>
               {categoryList}
+
               <Grid item md={6} xs={12}>
                 <Box
                   sx={{

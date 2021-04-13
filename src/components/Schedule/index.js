@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import moment from "moment";
 /*-------Styling-------*/
 import {
   Box,
@@ -45,18 +46,18 @@ const Schedule = () => {
   const state = useSelector((state) => state.workingHoursReducer.workingHours);
   const loading = useSelector((state) => state.workingHoursReducer.loading);
   const [stateHours, setState] = useState({
-    openTime: "",
-    closeTime: "",
+    openTime: null,
+    closeTime: null,
   });
+
   const handleChange = (event) => {
     setState({ ...stateHours, [event.target.name]: event.target.value });
   };
   const handleSubmit = (workingDayId, stateHours) => {
-    console.log(workingDayId, stateHours);
     dispatch(editWorkingHours(workingDayId, stateHours));
     setState({
-      openTime: "",
-      closeTime: "",
+      openTime: null,
+      closeTime: null,
     });
   };
 
@@ -84,7 +85,9 @@ const Schedule = () => {
           alignSelf: "center",
         }}
       >
-        <Typography>{day.openTime}</Typography>
+        <Typography>
+          {moment(day.openTime, ["HH.mm.ss"]).format("hh:mm a	")}
+        </Typography>
       </Grid>
       <Grid
         item
@@ -96,7 +99,9 @@ const Schedule = () => {
           alignSelf: "center",
         }}
       >
-        <Typography>{day.closeTime}</Typography>
+        <Typography>
+          {moment(day.closeTime, ["HH.mm.ss"]).format("hh:mm a	")}
+        </Typography>
       </Grid>
       <Grid item md={3} xs={12}>
         <TextField
@@ -106,6 +111,14 @@ const Schedule = () => {
           onChange={handleChange}
           required
           variant="outlined"
+          type="time"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          inputProps={{
+            step: 300, // 5 min
+          }}
+          defaultValue={day.openTime}
         />
       </Grid>
       <Grid item md={3} xs={12}>
@@ -116,6 +129,14 @@ const Schedule = () => {
           onChange={handleChange}
           required
           variant="outlined"
+          type="time"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          inputProps={{
+            step: 300, // 5 min
+          }}
+          defaultValue={day.closeTime}
         />
       </Grid>
       <Grid

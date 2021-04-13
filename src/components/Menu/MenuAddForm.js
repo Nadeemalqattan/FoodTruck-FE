@@ -59,9 +59,8 @@ const MenuAddForm = () => {
   const [menu, setMenu] = useState({
     name: "",
     price: 0,
-    // description: "",
-    // category: "",
-    // image: "",
+    description: "",
+    image: "",
   });
 
   const handleChange = (event) => {
@@ -70,10 +69,12 @@ const MenuAddForm = () => {
       [event.target.name]: event.target.value,
     });
   };
-
+  const handleImage = (event) => {
+    setMenu({ ...menu, image: event.target.files[0] });
+  };
   const handleSubmit = () => {
     dispatch(addMenu(menu, location.state.categoryID));
-    history.push("/menu");
+    history.goBack();
   };
   return (
     <div className={classes.root}>
@@ -82,17 +83,14 @@ const MenuAddForm = () => {
         <div className={classes.toolbar} />
         <form autoComplete="off" noValidate>
           <Card>
-            <CardHeader
-              subheader="The information can be edited"
-              title="Add new meal"
-            />
+            <CardHeader title="Add new item" />
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
-                <Grid item md={6} xs={12}>
+                <Grid item md={4} xs={12}>
                   <TextField
                     fullWidth
-                    label="Meal name"
+                    label="Item Name"
                     name="name"
                     onChange={handleChange}
                     required
@@ -101,51 +99,7 @@ const MenuAddForm = () => {
                     type="text"
                   />
                 </Grid>
-                {/* <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    type="file"
-                    helperText="Upload Meal Image"
-                    name="image"
-                    onChange={handleChange}
-                    required
-                    value={menu.image}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={12} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Description"
-                    name="description"
-                    onChange={handleChange}
-                    required
-                    value={menu.description}
-                    variant="outlined"
-                    type="text"
-
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Category"
-                    name="category"
-                    onChange={handleChange}
-                    required
-                    select
-                    SelectProps={{ native: true }}
-                    value={menu.category}
-                    variant="outlined"
-                  >
-                    {categories.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
-                </Grid> */}
-                <Grid item md={6} xs={12}>
+                <Grid item md={4} xs={12}>
                   <TextField
                     fullWidth
                     label="Price"
@@ -157,7 +111,30 @@ const MenuAddForm = () => {
                     type="number"
                   />
                 </Grid>
-
+                <Grid item md={4} xs={12}>
+                  <TextField
+                    fullWidth
+                    type="file"
+                    helperText="Upload Item Image"
+                    name="image"
+                    onChange={handleImage}
+                    required
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item md={12} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Description"
+                    name="description"
+                    onChange={handleChange}
+                    value={menu.description}
+                    variant="outlined"
+                    type="text"
+                    multiline
+                    rows={4}
+                  />
+                </Grid>
                 <Grid item md={6} xs={12}>
                   <Box
                     sx={{
