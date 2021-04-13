@@ -15,6 +15,15 @@ export const editWorkingHours = (workingHourID, stateHours) => async (
   dispatch
 ) => {
   try {
+    if (stateHours.openTime === null) {
+      stateHours = {
+        closeTime: stateHours.closeTime,
+      };
+    } else if (stateHours.closeTime === null) {
+      stateHours = {
+        openTime: stateHours.openTime,
+      };
+    }
     const res = await instance.put(
       `foodtruck/workinghours/${workingHourID}`,
       stateHours

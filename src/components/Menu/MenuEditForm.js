@@ -50,15 +50,12 @@ const MenuEdit = () => {
 
   const menu = category.FoodItems.find((menu) => menu.id === +menuId);
 
-  console.log("category it", categoryId);
-
   const classes = useStyles();
   const [values, setValues] = useState({
-    mealName: menu.name,
-    // description: "",
-    // category: "",
+    name: menu.name,
+    description: menu.description,
     price: menu.price,
-    // image: "",
+    image: menu.image,
   });
 
   const handleChange = (event) => {
@@ -67,10 +64,12 @@ const MenuEdit = () => {
       [event.target.name]: event.target.value,
     });
   };
-
+  const handleImage = (event) => {
+    setValues({ ...values, image: event.target.files[0] });
+  };
   const handleSubmit = () => {
     dispatch(updateMenu(categoryId, menuId, values));
-    history.push("/menu");
+    history.goBack();
   };
   return (
     <div className={classes.root}>
@@ -86,26 +85,37 @@ const MenuEdit = () => {
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
-                <Grid item md={6} xs={12}>
+                <Grid item md={4} xs={12}>
                   <TextField
                     fullWidth
                     label="Meal name"
-                    name="mealName"
+                    name="name"
                     onChange={handleChange}
                     required
-                    value={values.mealName}
+                    value={values.name}
                     variant="outlined"
                   />
                 </Grid>
-                {/* <Grid item md={6} xs={12}>
+                <Grid item md={4} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Price"
+                    name="price"
+                    onChange={handleChange}
+                    required
+                    value={values.price}
+                    variant="outlined"
+                    type="number"
+                  />
+                </Grid>
+                <Grid item md={4} xs={12}>
                   <TextField
                     fullWidth
                     type="file"
                     helperText="Upload Meal Image"
                     name="image"
-                    onChange={handleChange}
+                    onChange={handleImage}
                     required
-                    value={values.image}
                     variant="outlined"
                   />
                 </Grid>
@@ -118,37 +128,6 @@ const MenuEdit = () => {
                     required
                     value={values.description}
                     variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Category"
-                    name="category"
-                    onChange={handleChange}
-                    required
-                    select
-                    SelectProps={{ native: true }}
-                    value={values.category}
-                    variant="outlined"
-                  >
-                    {categories.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
-                </Grid> */}
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Price"
-                    name="price"
-                    onChange={handleChange}
-                    required
-                    value={values.price}
-                    variant="outlined"
-                    type="number"
                   />
                 </Grid>
 
