@@ -1,3 +1,4 @@
+import { AccessTimeOutlined } from "@material-ui/icons";
 import * as types from "../types";
 
 const initialState = {
@@ -34,6 +35,7 @@ const menuReducer = (state = initialState, action) => {
         name: action.payload.name,
         price: action.payload.price,
         image: action.payload.image,
+        description: action.payload.description,
       };
       const newMenuState = [...state.menu];
       newMenuState[index].FoodItems.push(foodItem);

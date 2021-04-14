@@ -105,7 +105,10 @@ const Hotspots = () => {
             <Divider />
             <CardContent>
               <Button
-                color="primary"
+                style={{
+                  backgroundColor: "#283044",
+                  color: "white",
+                }}
                 variant="contained"
                 onClick={handleSubmit}
               >

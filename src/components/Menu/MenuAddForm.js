@@ -135,23 +135,23 @@ const MenuAddForm = () => {
                     rows={4}
                   />
                 </Grid>
-                <Grid item md={6} xs={12}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      p: 3,
+                <Grid
+                  item
+                  md={12}
+                  xs={12}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Button
+                    variant="contained"
+                    onClick={handleSubmit}
+                    style={{
+                      backgroundColor: "#283044",
+                      color: "white",
+                      marginBottom: "10px",
                     }}
                   >
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      // href="/menu"
-                      onClick={handleSubmit}
-                    >
-                      Add
-                    </Button>
-                  </Box>
+                    Add
+                  </Button>
                 </Grid>
               </Grid>
             </CardContent>

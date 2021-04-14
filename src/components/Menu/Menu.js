@@ -57,19 +57,32 @@ const Menu = () => {
         <div className={classes.toolbar} />
         <form autoComplete="off" noValidate>
           <Card>
-            <CardHeader subheader="" title="Menu" />
+            <div className="container-fluid">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                }}
+              >
+                <CardHeader subheader="" title="Menu" />
+                <Link to="/menu/add" style={{ textDecoration: "none" }}>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    style={{
+                      backgroundColor: "#283044",
+                      color: "white",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Add Category
+                  </Button>
+                </Link>
+              </div>
+            </div>
             <Divider />
-
             <CardContent>
-              <Link to="/menu/add" style={{ textDecoration: "none" }}>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  style={{ marginBottom: "10px" }}
-                >
-                  Add Category
-                </Button>
-              </Link>
               {categoryList}
 
               <Grid item md={6} xs={12}>

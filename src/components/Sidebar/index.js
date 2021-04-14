@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   appBar: {
+    backgroundColor: "#f4592f",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -169,7 +170,7 @@ const Sidebar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Pop-up
+            Food on Wheels
           </Typography>
         </Toolbar>
       </AppBar>

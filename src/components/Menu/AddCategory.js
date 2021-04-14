@@ -81,7 +81,12 @@ const AddCategory = () => {
                   />
                 </Grid>
 
-                <Grid item md={6} xs={12}>
+                <Grid
+                  item
+                  md={6}
+                  xs={12}
+                  style={{ display: "flex", alignItems: "center" }}
+                >
                   <Box
                     sx={{
                       display: "flex",
@@ -90,9 +95,12 @@ const AddCategory = () => {
                     }}
                   >
                     <Button
-                      color="primary"
                       variant="contained"
                       onClick={handleSubmit}
+                      style={{
+                        backgroundColor: "#283044",
+                        color: "white",
+                      }}
                     >
                       Add
                     </Button>
