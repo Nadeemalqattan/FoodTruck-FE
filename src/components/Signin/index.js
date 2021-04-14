@@ -103,16 +103,11 @@ const Signin = () => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            style={{ backgroundColor: "#ff917e", color: "white" }}
             className={classes.submit}
           >
             Sign In
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link variant="body2">Request an account</Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
     </Container>

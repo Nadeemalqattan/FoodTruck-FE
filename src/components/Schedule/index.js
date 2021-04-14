@@ -54,11 +54,13 @@ const Schedule = () => {
     setState({ ...stateHours, [event.target.name]: event.target.value });
   };
   const handleSubmit = (workingDayId, stateHours) => {
-    dispatch(editWorkingHours(workingDayId, stateHours));
-    setState({
-      openTime: null,
-      closeTime: null,
-    });
+    if (!(stateHours.openTime === null && stateHours.closeTime === null)) {
+      dispatch(editWorkingHours(workingDayId, stateHours));
+      setState({
+        openTime: null,
+        closeTime: null,
+      });
+    }
   };
 
   const formList = state.map((day) => (
@@ -150,8 +152,8 @@ const Schedule = () => {
         }}
       >
         <Button
-          color="primary"
           variant="contained"
+          style={{ backgroundColor: "#283044", color: "white" }}
           onClick={() => handleSubmit(day.id, stateHours)}
         >
           Edit
