@@ -1,5 +1,6 @@
 import instance from "./instance";
 import * as types from "../types";
+import { toast } from "react-toastify";
 
 /*-------Fetch Menu-------*/
 export const fetchMenu = () => async (dispatch) => {
@@ -32,6 +33,7 @@ export const addMenu = (foodcategory, categoryID) => async (dispatch) => {
       type: types.ADD_ITEM,
       payload: res.data,
     });
+    toast.success("Item added successfully");
   } catch (error) {
     console.log("ERROR: ", error);
   }
@@ -41,7 +43,6 @@ export const addMenu = (foodcategory, categoryID) => async (dispatch) => {
 export const updateMenu = (categoryID, menuId, updateMenu) => {
   return async (dispatch) => {
     try {
-
       const formData = new FormData();
       for (const iterator in updateMenu) {
         formData.append(iterator, updateMenu[iterator]);
@@ -55,6 +56,7 @@ export const updateMenu = (categoryID, menuId, updateMenu) => {
         type: "UPDATE_MENU",
         payload: res.data,
       });
+      toast.success("Item updated successfully");
     } catch (error) {
       console.log("error:", error);
     }
@@ -71,6 +73,7 @@ export const deleteMenu = (categoryID, menuId) => async (dispatch) => {
       type: types.DELETE_MENU,
       payload: { categoryID, menuId },
     });
+    toast.error("Item deleted successfully");
   } catch (error) {
     console.log("ERROR: ", error);
   }
@@ -84,6 +87,7 @@ export const addCategory = (category) => async (dispatch) => {
       type: types.ADD_CATEGORY,
       payload: res.data,
     });
+    toast.success("Category added successfully");
   } catch (error) {
     console.log("ERROR: ", error);
   }
@@ -97,6 +101,7 @@ export const removeCategory = (categoryID) => async (dispatch) => {
       type: "DELETE_CATEGORY",
       payload: categoryID,
     });
+    toast.error("Category deleted successfully");
   } catch (error) {
     console.log("ERROR: ", error);
   }
@@ -110,6 +115,7 @@ export const editCategory = (categoryID) => async (dispatch) => {
       type: "DELETE_CATEGORY",
       payload: categoryID,
     });
+    toast.success("Category edited successfully");
   } catch (error) {
     console.log("ERROR: ", error);
   }
