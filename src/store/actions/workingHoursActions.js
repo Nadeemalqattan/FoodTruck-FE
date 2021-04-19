@@ -1,4 +1,5 @@
 import instance from "./instance";
+import { toast } from "react-toastify";
 
 export const fetchWorkingHours = () => async (dispatch) => {
   try {
@@ -32,6 +33,7 @@ export const editWorkingHours = (workingHourID, stateHours) => async (
       type: "EDIT_WORKING_HOURS",
       payload: res.data,
     });
+    toast.success("Time edited successfully");
   } catch (error) {
     console.log("ERROR: ", error);
   }

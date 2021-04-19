@@ -20,6 +20,7 @@ export const signin = (user) => {
       const res = await instance.post("/foodtruck/signin", user);
       localStorage.setItem("myToken", res.data.token);
       dispatch(setUser(res.data.token));
+      toast.success("Signed in successfully");
     } catch (error) {
       console.error(error);
     }
@@ -30,6 +31,7 @@ export const signin = (user) => {
 export const signout = () => {
   localStorage.removeItem("myToken");
   delete instance.defaults.headers.common.Authorization;
+  toast.error("Signed out");
   return {
     type: types.SET_USER,
     payload: null,
@@ -112,6 +114,7 @@ export const getLocation = (longitude, latitude, foodTruckID) => async (
       type: types.GET_LOCATION,
       payload: { latitude, longitude },
     });
+    toast.success("Location updated successfully");
   } catch (error) {
     console.log(error);
   }
